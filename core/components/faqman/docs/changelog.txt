@@ -2,4 +2,5 @@ Changelog for faqMan.
 
 faqMan 1.0.0
 ==============
+-Fixed snippet property
 - Initial release.

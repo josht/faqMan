@@ -51,14 +51,6 @@ $properties = array(
         'lexicon' => 'faqman:properties',
     ),
     array(
-        'name' => 'limit',
-        'desc' => 'prop_faqman.limit_desc',
-        'type' => 'textfield',
-        'options' => '',
-        'value' => '',
-        'lexicon' => 'faqman:properties',
-    ),
-    array(
         'name' => 'outputSeparator',
         'desc' => 'prop_faqman.outputseparator_desc',
         'type' => 'textfield',
@@ -69,9 +61,9 @@ $properties = array(
     array(
         'name' => 'toPlaceholder',
         'desc' => 'prop_faqman.toplaceholder_desc',
-        'type' => 'textfield',
+        'type' => 'combo-boolean',
         'options' => '',
-        'value' => true,
+        'value' => false,
         'lexicon' => 'faqman:properties',
     ),
 /*
