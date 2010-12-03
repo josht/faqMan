@@ -15,7 +15,7 @@ $xpdo_meta_map['faqManSet']= array (
     'name' => 
     array (
       'dbtype' => 'varchar',
-      'precision' => '100',
+      'precision' => '255',
       'phptype' => 'string',
       'null' => false,
       'default' => '',

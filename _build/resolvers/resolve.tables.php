@@ -38,6 +38,16 @@ if ($object->xpdo) {
 
             break;
         case xPDOTransport::ACTION_UPGRADE:
+            $modx =& $object->xpdo;
+            $modelPath = $modx->getOption('faqman.core_path',null,$modx->getOption('core_path').'components/faqman/').'model/';
+            $modx->addPackage('faqman',$modelPath);
+
+            $modx->exec("
+                ALTER TABLE `{$modx->getTableName('faqManItem')}`
+                CHANGE `question`
+                `question` VARCHAR( 255 ) NOT NULL DEFAULT '';
+            ");
+            
             break;
     }
 }

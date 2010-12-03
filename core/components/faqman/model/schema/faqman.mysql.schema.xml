@@ -3,7 +3,7 @@
 
     <!-- FAQ's are grouped into 'sets', when categories are implemented they will be used to group items within sets -->
     <object class="faqManSet" table="faqman_set" extends="xPDOSimpleObject">
-        <field key="name" dbtype="varchar" precision="100" phptype="string" null="false" default="" />
+        <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="description" dbtype="text" phptype="text" null="false" default="" />
 
         <composite alias="Item" class="faqManItem" local="id" foreign="set" cardinality="many" owner="local" />
