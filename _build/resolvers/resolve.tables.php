@@ -36,6 +36,13 @@ if ($object->xpdo) {
 
             $manager->createObjectContainer('faqManItem');
 
+            $modx->log(modX::LOG_LEVEL_ERROR, "ALTER TABLE {$modx->getTableName('faqManItem')} CHANGE `question` `question` VARCHAR( 255 ) NOT NULL DEFAULT '';");
+            $modx->exec("
+                ALTER TABLE {$modx->getTableName('faqManItem')}
+                CHANGE `question`
+                 `question` VARCHAR( 255 ) NOT NULL DEFAULT '';
+            ");
+
             break;
         case xPDOTransport::ACTION_UPGRADE:
             $modx =& $object->xpdo;
@@ -43,7 +50,7 @@ if ($object->xpdo) {
             $modx->addPackage('faqman',$modelPath);
 
             $modx->exec("
-                ALTER TABLE `{$modx->getTableName('faqManItem')}`
+                ALTER TABLE {$modx->getTableName('faqManItem')}
                 CHANGE `question`
                 `question` VARCHAR( 255 ) NOT NULL DEFAULT '';
             ");
