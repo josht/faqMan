@@ -17,7 +17,7 @@ To display your FAQ's on your side, simply call
 set you wish to display). If you do not select a set, all FAQ's will be
 displayed and grouped first by set then their rank in each set.
 
-** For now, when calling the snippet it is required to be between <ul> tags.
+** For now, when calling the snippet it is required to be between ul tags.
 
 ## Copyright Information
 
