@@ -35,13 +35,7 @@ if ($object->xpdo) {
             $manager = $modx->getManager();
 
             $manager->createObjectContainer('faqManItem');
-
-            $modx->log(modX::LOG_LEVEL_ERROR, "ALTER TABLE {$modx->getTableName('faqManItem')} CHANGE `question` `question` VARCHAR( 255 ) NOT NULL DEFAULT '';");
-            $modx->exec("
-                ALTER TABLE {$modx->getTableName('faqManItem')}
-                CHANGE `question`
-                 `question` VARCHAR( 255 ) NOT NULL DEFAULT '';
-            ");
+            $manager->createObjectContainer('faqManSet');
 
             break;
         case xPDOTransport::ACTION_UPGRADE:
