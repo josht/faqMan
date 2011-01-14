@@ -1,6 +1,7 @@
 Changelog for faqMan.
 
-faqMan 1.0.0
+faqMan 1.0.2
 ==============
--Fixed snippet property
+- Questions & answers are now only limited by the size of TEXT
+- Fixed snippet property
 - Initial release.

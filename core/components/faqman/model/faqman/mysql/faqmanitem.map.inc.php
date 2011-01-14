@@ -17,9 +17,8 @@ $xpdo_meta_map['faqManItem']= array (
   array (
     'question' => 
     array (
-      'dbtype' => 'varchar',
-      'precision' => '150',
-      'phptype' => 'string',
+      'dbtype' => 'text',
+      'phptype' => 'text',
       'null' => false,
       'default' => '',
     ),
