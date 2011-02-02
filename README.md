@@ -32,12 +32,9 @@ For example
 
 To output your FAQs, just place following snippet call in desired location:
 
-[[faqman?
-  &tpl=`faq_tpl`
-]]
-
-################
-###############
+    [[faqman?
+      &tpl=`faq_tpl`
+    ]]
 
 ##Options
 
@@ -64,14 +61,14 @@ outputSeparator	Separate each question/answer-pair by given string.
 
 A more complex call would look like this:
 
-[[faqman?
-  &set=`1`
-  &tpl=`faq_tpl`
-  &sortBy=`rank`
-  &sortDir=`ASC`
-  &limit=`10`
-  &outputSeparator=`<hr>`
-]]
+    [[faqman?
+      &set=`1`
+      &tpl=`faq_tpl`
+      &sortBy=`rank`
+      &sortDir=`ASC`
+      &limit=`10`
+      &outputSeparator=`<hr>`
+    ]]
 
 ***
 ## Copyright Information
