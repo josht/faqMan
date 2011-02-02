@@ -17,22 +17,18 @@ Here you can add as many question/answer-pairs as you like.
 
 The button in the upper-right corner brings you back to the set overview.
 
-################
-###############
-
-FAQ Tempates
+***
+##FAQ Templates
 
 For templating, create a new chunk and use the placeholders [[+question]] and [[+answer]] to output the FAQs.
 
 For example
 
-<h3 class="faq_question"><a href="#">[[+question]]</a></h3>
-<div class="faq_answer"> [[+answer]]</div>
+    <h3 class="faq_question"><a href="#">[[+question]]</a></h3>
+    <div class="faq_answer"> [[+answer]]</div>
 
-################
-###############
 
-FAQ Snippet call
+##FAQ Snippet call
 
 To output your FAQs, just place following snippet call in desired location:
 
@@ -43,7 +39,7 @@ To output your FAQs, just place following snippet call in desired location:
 ################
 ###############
 
-Options
+##Options
 
 You can use some more options to modify the call to your needs:
 
@@ -77,6 +73,7 @@ A more complex call would look like this:
   &outputSeparator=`<hr>`
 ]]
 
+***
 ## Copyright Information
 
 Thanks to Niklas (https://github.com/nklsf) for revamping the instructions for me!
