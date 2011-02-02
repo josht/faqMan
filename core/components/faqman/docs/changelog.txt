@@ -1,7 +1,8 @@
 Changelog for faqMan.
 
-faqMan 1.0.2
+faqMan 1.0.3 rc1
 ==============
+- German translation
 - Questions & answers are now only limited by the size of TEXT
 - Fixed snippet property
 - Initial release.
