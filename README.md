@@ -42,19 +42,19 @@ You can use some more options to modify the call to your needs:
 
 ---
 
-set             ID-value of FAQ set and lets you choose which FAQ set to display (if this is not specified ALL FAQ's will be displayed)
+**set**             ID-value of FAQ set and lets you choose which FAQ set to display (if this is not specified ALL FAQ's will be displayed)
 
-tpl             Name of the chunk to display your Questions/Answers
+**tpl**             Name of the chunk to display your Questions/Answers
 
-categoryTpl     Name of the chunk to display your Category Headings (*category headings are not yet implemented)
+**categoryTpl**     Name of the chunk to display your Category Headings (*category headings are not yet implemented)
 
-sortBy          This allows you to choose which field to sort by (default is rank)
+**sortBy**          This allows you to choose which field to sort by (default is rank)
 
-sortDir         ASC / DESC
+**sortDir**         ASC / DESC
 
-limit           Amount of Questions/Answers to display (default is to show all that are returned)
+**limit**           Amount of Questions/Answers to display (default is to show all that are returned)
 
-outputSeparator	Separate each question/answer-pair by given string.
+**outputSeparator**	Separate each question/answer-pair by given string.
 
 
 ---
