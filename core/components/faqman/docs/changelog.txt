@@ -1,5 +1,9 @@
 Changelog for faqMan.
 
+FAQ Manager 1.0.4 rc1
+======================
+- Changed answers to be in the row body
+
 faqMan 1.0.3 rc1
 ==============
 - German translation

@@ -72,7 +72,18 @@ faqMan.grid.Items = function(config) {
             text: _('faqman.item_create')
             ,handler: this.createItem
             ,scope: this
-        },'->',{
+        }
+        ,{
+            pressed: true
+            ,enableToggle:true
+            ,text: _('faqman.answers')
+            ,scope:this
+            ,toggleHandler: function(btn, pressed) {
+                this.togglePreview(pressed);
+            }
+        }
+        ,'->'
+        ,{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'faqman-tf-search'
@@ -123,7 +134,7 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         });
     }
     ,applyRowClass: function(record, rowIndex, p, ds) {
-        if (this.showPreview) {
+        if (this.grid.viewConfig.showPreview) {
             var xf = Ext.util.Format;
             p.body = '<p>' + xf.ellipsis(xf.stripTags(record.data.answer), 300) + '</p>';
             return 'x-grid3-row-expanded';
@@ -149,7 +160,11 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         this.refresh();
         return true;
     }
-
+    ,togglePreview: function(show) {
+        console.log(this);
+        this.config.viewConfig.showPreview = show;
+        this.refresh();
+    }
     ,getMenu: function() {
         var m = [];
         m.push({
@@ -173,7 +188,7 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
                 xtype: 'faqman-window-item-create'
                 ,set: s
                 ,listeners: {
-                    'success': {fn:function() { this.refresh(); },scope:this}
+                    'success': {fn:function() {this.refresh();},scope:this}
                 }
             });
         }
@@ -189,7 +204,7 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
                 xtype: 'faqman-window-item-update'
                 ,record: r
                 ,listeners: {
-                    'success': {fn:function() { this.refresh(); },scope:this}
+                    'success': {fn:function() {this.refresh();},scope:this}
                 }
             });
         }
@@ -210,7 +225,7 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
                 ,id: this.menu.record.id
             }
             ,listeners: {
-                'success': {fn:function(r) { this.refresh(); },scope:this}
+                'success': {fn:function(r) {this.refresh();},scope:this}
             }
         });
     }
