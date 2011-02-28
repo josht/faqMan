@@ -15,6 +15,12 @@ faqMan.grid.Items = function(config) {
         ,enableDragDrop: true
         ,remoteSort: false
         ,autosave: true
+        ,viewConfig: {
+            forceFit:true
+            ,enableRowBody:true
+            ,showPreview:true
+            ,getRowClass: this.applyRowClass
+        }
         ,sortInfo: {
             field: 'rank'
             ,direction: 'ASC'
@@ -26,10 +32,12 @@ faqMan.grid.Items = function(config) {
         },{*/
             header: _('faqman.question')
             ,dataIndex: 'question'
-            ,width: 100
+            ,width: 300
+            ,renderer: this.formatTitle
         },{
             header: _('faqman.answer')
             ,dataIndex: 'answer'
+            ,hidden:true
             ,width: 300
         }]
         ,listeners: {
@@ -114,6 +122,14 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
             }
         });
     }
+    ,applyRowClass: function(record, rowIndex, p, ds) {
+        if (this.showPreview) {
+            var xf = Ext.util.Format;
+            p.body = '<p>' + xf.ellipsis(xf.stripTags(record.data.answer), 300) + '</p>';
+            return 'x-grid3-row-expanded';
+        }
+        return 'x-grid3-row-collapsed';
+    }
     ,_addEnterKeyHandler: function() {
         this.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
             this.fireEvent('change');
@@ -197,6 +213,13 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
                 'success': {fn:function(r) { this.refresh(); },scope:this}
             }
         });
+    }
+
+    ,formatTitle: function(value, p, record) {
+        return String.format(
+                '<div class="title"><b>{0}</b></div>',
+                value
+        );
     }
 });
 Ext.reg('faqman-grid-items',faqMan.grid.Items);
