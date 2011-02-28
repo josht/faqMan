@@ -1,10 +1,12 @@
 --------------------
-faqMan
+FAQ Manager
 --------------------
 Author: Josh Tambunga <josh+faqman@joshsmind.com>
 --------------------
 
 An FAQ Manager for MODx Revolution.
+
+View the quick start on GitHub: http://github.com/josht/faqMan/
 
 Feel free to suggest ideas/improvements/bugs on GitHub:
 http://github.com/josht/faqMan/issues
