@@ -32,7 +32,7 @@ if (!$set) return $modx->error->failure($modx->lexicon('faqman.item_err_nf'));
 
 $set->fromArray($scriptProperties);
 
-if ($item->save() == false) {
+if ($set->save() == false) {
     return $modx->error->failure($modx->lexicon('faqman.set_err_save'));
 }
 
