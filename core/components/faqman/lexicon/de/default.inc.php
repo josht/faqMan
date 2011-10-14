@@ -59,4 +59,4 @@ $_lang['faqman.intro_msg'] = 'Einträge verwalten.';
 
 $_lang['faqman.question'] = 'Frage';
 $_lang['faqman.answer'] = 'Antwort';
-$_lang['faqman.answers'] = 'Antwort';
+$_lang['faqman.toggle_answers'] = 'Antwortvorschau ein- / ausblenden';
