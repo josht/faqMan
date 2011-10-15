@@ -58,4 +58,4 @@ $_lang['faqman.intro_msg'] = 'Manage your items.';
 
 $_lang['faqman.question'] = 'Question';
 $_lang['faqman.answer'] = 'Answer';
-$_lang['faqman.answers'] = 'Answers';
+$_lang['faqman.toggle_answers'] = 'Toggle Answer Previews';

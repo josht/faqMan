@@ -72,18 +72,15 @@ faqMan.grid.Items = function(config) {
             text: _('faqman.item_create')
             ,handler: this.createItem
             ,scope: this
-        }
-        ,{
+        },'-',{
             pressed: true
             ,enableToggle:true
-            ,text: _('faqman.answers')
+            ,text: _('faqman.toggle_answers')
             ,scope:this
             ,toggleHandler: function(btn, pressed) {
                 this.togglePreview(pressed);
             }
-        }
-        ,'->'
-        ,{
+        },'->',{
             xtype: 'textfield'
             ,name: 'search'
             ,id: 'faqman-tf-search'
@@ -101,7 +98,7 @@ faqMan.grid.Items = function(config) {
                     });
                 },scope:this}
             }
-        },{
+        },'-',{
             xtype: 'button'
             ,id: 'modx-filter-clear'
             ,text: _('filter_clear')
@@ -161,7 +158,6 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         return true;
     }
     ,togglePreview: function(show) {
-        console.log(this);
         this.config.viewConfig.showPreview = show;
         this.refresh();
     }
@@ -183,32 +179,26 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         if (!this.config || !this.config.setid) return false;
         var s = this.config.setid;
         
-        if (!this.windows.createItem) {
-            this.windows.createItem = MODx.load({
-                xtype: 'faqman-window-item-create'
-                ,set: s
-                ,listeners: {
-                    'success': {fn:function() {this.refresh();},scope:this}
-                }
-            });
-        }
-        this.windows.createItem.fp.getForm().reset();
+        this.windows.createItem = MODx.load({
+            xtype: 'faqman-window-item-create'
+            ,set: s
+            ,listeners: {
+                'success': {fn:function() {this.refresh();},scope:this}
+            }
+        });
         this.windows.createItem.show(e.target);
     }
     ,updateItem: function(btn,e) {
         if (!this.menu.record || !this.menu.record.id) return false;
         var r = this.menu.record;
 
-        if (!this.windows.updateItem) {
-            this.windows.updateItem = MODx.load({
-                xtype: 'faqman-window-item-update'
-                ,record: r
-                ,listeners: {
-                    'success': {fn:function() {this.refresh();},scope:this}
-                }
-            });
-        }
-        this.windows.updateItem.fp.getForm().reset();
+        this.windows.updateItem = MODx.load({
+            xtype: 'faqman-window-item-update'
+            ,record: r
+            ,listeners: {
+                'success': {fn:function() {this.refresh();},scope:this}
+            }
+        });
         this.windows.updateItem.fp.getForm().setValues(r);
         this.windows.updateItem.show(e.target);
     }
@@ -246,9 +236,10 @@ faqMan.window.CreateItem = function(config) {
     Ext.applyIf(config,{
         title: _('faqman.item_create')
         ,id: this.ident
-        ,height: 150
-        ,width: 475
+        ,autoHeight: true
+        ,width: 600
         ,url: faqMan.config.connector_url
+        ,closeAction: 'close'
         ,baseParams: {
             action: 'mgr/item/create'
             ,set: config.set
@@ -258,16 +249,19 @@ faqMan.window.CreateItem = function(config) {
             ,fieldLabel: _('faqman.question')
             ,name: 'question'
             ,id: 'faqman-'+this.ident+'-question'
-            ,width: 300
+            ,width: '94%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('faqman.answer')
             ,name: 'answer'
             ,id: 'faqman-'+this.ident+'-answer'
-            ,width: 300
+            ,width: '94%'
         }]
     });
     faqMan.window.CreateItem.superclass.constructor.call(this,config);
+    this.on('activate',function() {
+        if (typeof Tiny != 'undefined') { MODx.loadRTE('faqman-'+this.ident+'-answer'); }
+    });
 };
 Ext.extend(faqMan.window.CreateItem,MODx.Window);
 Ext.reg('faqman-window-item-create',faqMan.window.CreateItem);
@@ -279,10 +273,11 @@ faqMan.window.UpdateItem = function(config) {
     Ext.applyIf(config,{
         title: _('faqman.item_update')
         ,id: this.ident
-        ,height: 150
-        ,width: 475
+        ,autoHeight: true
+        ,width: 600
         ,url: faqMan.config.connector_url
         ,action: 'mgr/item/update'
+        ,closeAction: 'close'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
@@ -292,16 +287,19 @@ faqMan.window.UpdateItem = function(config) {
             ,fieldLabel: _('faqman.question')
             ,name: 'question'
             ,id: 'faqman-'+this.ident+'-question'
-            ,width: 300
+            ,width: '94%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('faqman.answer')
             ,name: 'answer'
             ,id: 'faqman-'+this.ident+'-answer'
-            ,width: 300
+            ,width: '94%'
         }]
     });
     faqMan.window.UpdateItem.superclass.constructor.call(this,config);
+    this.on('activate',function() {
+        if (typeof Tiny != 'undefined') { MODx.loadRTE('faqman-'+this.ident+'-answer'); }
+    });
 };
 Ext.extend(faqMan.window.UpdateItem,MODx.Window);
 Ext.reg('faqman-window-item-update',faqMan.window.UpdateItem);

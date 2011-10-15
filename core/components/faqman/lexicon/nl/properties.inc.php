@@ -20,22 +20,14 @@
  * @package faqman
  */
 /**
- * Update an Item
+ * Properties English Lexicon Entries for faqMan
  *
  * @package faqman
- * @subpackage processors
+ * @subpackage lexicon
  */
-/* get board */
-if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.set_err_ns'));
-$set = $modx->getObject('faqManSet',$scriptProperties['id']);
-if (!$set) return $modx->error->failure($modx->lexicon('faqman.item_err_nf'));
-
-$set->fromArray($scriptProperties);
-
-if ($set->save() == false) {
-    return $modx->error->failure($modx->lexicon('faqman.set_err_save'));
-}
-
-/* output */
-$setArray = $set->toArray('',true);
-return $modx->error->success('',$setArray);
+$_lang['prop_faqman.limit_desc'] = 'Het aantal FAQs om weer te geven per pagina.';
+$_lang['prop_faqman.outputseparator_desc'] = 'Scheidingstekens tussen elke row.';
+$_lang['prop_faqman.sortby_desc'] = 'Het veld om op te sorteren.';
+$_lang['prop_faqman.sortdir_desc'] = 'Richting om op te sorteren.';
+$_lang['prop_faqman.tpl_desc'] = 'Chunk om te gebruiken voor elke vraag.';
+$_lang['prop_faqman.toplaceholder_desc'] = 'Wanner ingevuld zal het resultaat in de placeholder gezet worden die je aangeeft in plaats van direct weer te geven.';
