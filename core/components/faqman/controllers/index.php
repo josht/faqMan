@@ -24,5 +24,5 @@
  * @subpackage controllers
  */
 require_once dirname(dirname(__FILE__)).'/model/faqman/faqman.class.php';
-$faqman = new faqMan($modx);
-return $faqman->initialize('mgr');
+$faqMan = new faqMan($modx);
+return $faqMan->initialize('mgr');
