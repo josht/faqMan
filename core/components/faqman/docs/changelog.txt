@@ -1,5 +1,10 @@
 Changelog for faqMan.
 
+FAQ Manager 1.0.5 pl
+=====================
+- Now supports rich-text in answers
+- Dutch translation
+
 FAQ Manager 1.0.4 rc1
 ======================
 - Changed answers to be in the row body
