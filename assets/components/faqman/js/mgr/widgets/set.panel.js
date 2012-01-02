@@ -17,7 +17,7 @@ faqMan.panel.Set = function(config) {
             ,items: [{
                 title: _('faqman.items')
                 ,items: [{
-                    html: '<p>'+_('faqman.item_intro_msg')+'<br />'
+                    html: '<p>'+_('faqman.item_intro_msg')+'</p>'
                     ,border:false
                     ,bodyCssClass: 'panel-desc'
                 },{
