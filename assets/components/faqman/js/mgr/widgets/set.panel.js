@@ -3,13 +3,13 @@ faqMan.panel.Set = function(config) {
     Ext.apply(config,{
         border: false
         ,baseCls: 'modx-formpanel'
+        ,cls: 'container'
         ,items: [{
             html: '<h2>'+_('faqman')+'</h2>'
             ,border: false
             ,cls: 'modx-page-header'
         },{
             xtype: 'modx-tabs'
-            ,bodyStyle: 'padding: 10px'
             ,defaults: { border: false, autoHeight: true }
             ,border: true
             ,activeItem: 0
@@ -17,12 +17,14 @@ faqMan.panel.Set = function(config) {
             ,items: [{
                 title: _('faqman.items')
                 ,items: [{
-                    html: '<p>'+_('faqman.item_intro_msg')+'</p><br />'
+                    html: '<p>'+_('faqman.item_intro_msg')+'</p>'
                     ,border:false
+                    ,bodyCssClass: 'panel-desc'
                 },{
                     xtype: 'faqman-grid-items'
                     ,setid: config.setid
                     ,preventRender: true
+                    ,cls: 'main-wrapper'
                 }]
             }]
         }]
