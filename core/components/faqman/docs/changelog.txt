@@ -1,5 +1,9 @@
 Changelog for faqMan.
 
+FAQ Manager 1.0.6 pl
+=====================
+-French translation
+
 FAQ Manager 1.0.5 pl
 =====================
 - Now supports rich-text in answers
