@@ -59,3 +59,5 @@ $_lang['faqman.intro_msg'] = 'Beheer je veelgestelde vragen.';
 $_lang['faqman.question'] = 'Vraag';
 $_lang['faqman.answer'] = 'Antwoord';
 $_lang['faqman.toggle_answers'] = 'Antwoorden Tonen/Verbergen';
+
+$_lang['setting_faqman.use_richtext'] = 'Activeer rich tekst editor';

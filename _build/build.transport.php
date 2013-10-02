@@ -34,7 +34,7 @@ set_time_limit(0);
 /* define package */
 define('PKG_NAME','faqMan');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','1.0.6');
+define('PKG_VERSION','1.1.0');
 define('PKG_RELEASE','pl');
 
 /* define sources */
@@ -175,6 +175,9 @@ if (empty($menu)) {
     $modx->log(modX::LOG_LEVEL_INFO,'Adding in PHP resolvers...');
     $vehicle->resolve('php',array(
         'source' => $sources['resolvers'] . 'resolve.tables.php',
+    ));
+    $vehicle->resolve('php',array(
+        'source' => $sources['resolvers'] . 'resolve.settings.php',
     ));
     $vehicle->resolve('php',array(
         'source' => $sources['resolvers'] . 'resolve.paths.php',

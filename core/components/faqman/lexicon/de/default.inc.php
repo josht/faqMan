@@ -60,3 +60,5 @@ $_lang['faqman.intro_msg'] = 'Einträge verwalten.';
 $_lang['faqman.question'] = 'Frage';
 $_lang['faqman.answer'] = 'Antwort';
 $_lang['faqman.toggle_answers'] = 'Antwortvorschau ein- / ausblenden';
+
+$_lang['setting_faqman.use_richtext'] = 'Rich-Text-Editor aktivieren';

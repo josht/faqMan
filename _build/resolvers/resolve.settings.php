@@ -20,21 +20,30 @@
  * @package faqman
  */
 /**
- * Loads system settings into build
+ * Update settings if old ones exist.
  *
  * @package faqman
  * @subpackage build
  */
-$settings = array();
+if ($object->xpdo) {
+    switch ($options[xPDOTransport::PACKAGE_ACTION]) {
+        case xPDOTransport::ACTION_INSTALL:
+        case xPDOTransport::ACTION_UPGRADE:
+            /**
+             * @var $modx modX
+             */
+            $modx =& $object->xpdo;
+            $setting = $modx->getObject('modSystemSetting', array(
+                'key'  => 'faqman.use_richtext',
+                'area' => 'TinyMCE'
+            ));
 
-/* Settings for the RTE integration */
-$settings['faqman.use_richtext']= $modx->newObject('modSystemSetting');
-$settings['faqman.use_richtext']->fromArray(array(
-    'key' => 'faqman.use_richtext',
-    'value' => true,
-    'xtype' => 'combo-boolean',
-    'namespace' => 'faqman',
-    'area' => 'editor',
-),'',true,true);
-
-return $settings;
+            // If this setting exists, we need to update it to the new area
+            if (is_object($setting)) {
+                $setting->set('area', 'editor');
+                $setting->save();
+            }
+        break;
+    }
+}
+return true;

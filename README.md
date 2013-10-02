@@ -20,12 +20,12 @@ The button in the upper-right corner brings you back to the set overview.
 ***
 ##FAQ Templates
 
-For templating, create a new chunk and use the placeholders [[+question]] and [[+answer]] to output the FAQs.
+To customize your template, create a new chunk and use the placeholders [[+question]] and [[+answer]] to output the FAQs.
 
 For example
 
-    <h3 class="faq_question"><a href="#">[[+question]]</a></h3>
-    <div class="faq_answer"> [[+answer]]</div>
+    <h3 class="faq_question"><a href="#answer[[+id]]">[[+question]]</a></h3>
+    <div id="answer[[+id]]" class="faq_answer">[[+answer]]</div>
 
 
 ##FAQ Snippet call
@@ -71,6 +71,7 @@ A more complex call would look like this:
     ]]
 
 ***
+
 ## Copyright Information
 
 Thanks to Niklas (https://github.com/nklsf) for revamping the instructions for me!
