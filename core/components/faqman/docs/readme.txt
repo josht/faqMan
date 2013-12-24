@@ -15,6 +15,8 @@ http://github.com/josht/faqMan/issues
 --------------------
 Copyright Information
 
-faqMan is distributed as GPL (as MODx Revolution is). faqMan was built using the
+faqMan is distributed as GPL.
+
+faqMan was built using the
 handy modExtra (https://github.com/splittingred/modExtra)
 created by splittingred(Shaun McCormick).

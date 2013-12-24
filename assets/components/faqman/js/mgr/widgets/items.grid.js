@@ -237,7 +237,7 @@ faqMan.window.CreateItem = function(config) {
         title: _('faqman.item_create')
         ,id: this.ident
         ,autoHeight: true
-        ,width: 600
+        ,width: 650
         ,url: faqMan.config.connector_url
         ,closeAction: 'close'
         ,baseParams: {
@@ -256,11 +256,12 @@ faqMan.window.CreateItem = function(config) {
             ,name: 'answer'
             ,id: 'faqman-'+this.ident+'-answer'
             ,width: '94%'
+            ,height: 250
         }]
     });
     faqMan.window.CreateItem.superclass.constructor.call(this,config);
     this.on('activate',function() {
-        if (typeof Tiny != 'undefined') { MODx.loadRTE('faqman-'+this.ident+'-answer'); }
+        if (MODx.loadRTE) { MODx.loadRTE('faqman-'+this.ident+'-answer'); }
     });
 };
 Ext.extend(faqMan.window.CreateItem,MODx.Window);
@@ -274,7 +275,7 @@ faqMan.window.UpdateItem = function(config) {
         title: _('faqman.item_update')
         ,id: this.ident
         ,autoHeight: true
-        ,width: 600
+        ,width: 650
         ,url: faqMan.config.connector_url
         ,action: 'mgr/item/update'
         ,closeAction: 'close'
@@ -294,11 +295,12 @@ faqMan.window.UpdateItem = function(config) {
             ,name: 'answer'
             ,id: 'faqman-'+this.ident+'-answer'
             ,width: '94%'
+            ,height: 250
         }]
     });
     faqMan.window.UpdateItem.superclass.constructor.call(this,config);
     this.on('activate',function() {
-        if (typeof Tiny != 'undefined') { MODx.loadRTE('faqman-'+this.ident+'-answer'); }
+        if (MODx.loadRTE) { MODx.loadRTE('faqman-'+this.ident+'-answer'); }
     });
 };
 Ext.extend(faqMan.window.UpdateItem,MODx.Window);

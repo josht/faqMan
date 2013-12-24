@@ -59,3 +59,5 @@ $_lang['faqman.intro_msg'] = 'Manage your items.';
 $_lang['faqman.question'] = 'Question';
 $_lang['faqman.answer'] = 'Answer';
 $_lang['faqman.toggle_answers'] = 'Toggle Answer Previews';
+
+$_lang['setting_faqman.use_richtext'] = 'Use Rich-Text Editor with FAQs';

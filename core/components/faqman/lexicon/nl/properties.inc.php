@@ -30,4 +30,5 @@ $_lang['prop_faqman.outputseparator_desc'] = 'Scheidingstekens tussen elke row.'
 $_lang['prop_faqman.sortby_desc'] = 'Het veld om op te sorteren.';
 $_lang['prop_faqman.sortdir_desc'] = 'Richting om op te sorteren.';
 $_lang['prop_faqman.tpl_desc'] = 'Chunk om te gebruiken voor elke vraag.';
+$_lang['prop_faqman.tplset_desc'] = 'The chunk to use for the heading of each displayed set of FAQs.';
 $_lang['prop_faqman.toplaceholder_desc'] = 'Wanner ingevuld zal het resultaat in de placeholder gezet worden die je aangeeft in plaats van direct weer te geven.';

@@ -18,27 +18,56 @@ Here you can add as many question/answer-pairs as you like.
 The button in the upper-right corner brings you back to the set overview.
 
 ***
-##FAQ Templates
+## FAQ Templates
 
-For templating, create a new chunk and use the placeholders [[+question]] and [[+answer]] to output the FAQs.
+The templates are divided into two parts, the set heading (setTpl) and the questions/answers (tpl).
 
-For example
+### setTpl
+To add headings to each set of FAQs, you will want to define this template. The template variables available in this template are:
 
-    <h3 class="faq_question"><a href="#">[[+question]]</a></h3>
-    <div class="faq_answer"> [[+answer]]</div>
+- [[+id]]
+- [[+name]]
+- [[+description]]
+
+The default template for this looks like this.
+
+    <h2>
+        [[+name]]
+        <div>[[+description]]</div>
+    </h2>
+
+### tpl
+The question/answer section template includes these placeholders
+
+- [[+id]]
+- [[+question]]
+- [[+answer]]
+- [[+rank]]
+- [[+set]]
+
+The default template for this section looks like this
+
+    <div class="faqman-question">[[+question]]</div>
+    <span class="faqman-answer">[[+answer]]</span>
 
 
 ##FAQ Snippet call
 
 To output your FAQs, just place following snippet call in desired location:
 
+    [[faqman]]
+
+Calling it like this will output all FAQ sets and their questions. A more specific call would be like this:
+
     [[faqman?
-      &tpl=`faq_tpl`
+      &set=`3`
+      &tpl=`tpl`
+      &setTpl=`setTpl`
     ]]
 
 ##Options
 
-You can use some more options to modify the call to your needs:
+There are more options available to modify the call to your needs:
 
 ---
 
@@ -46,15 +75,15 @@ You can use some more options to modify the call to your needs:
 
 **tpl**             Name of the chunk to display your Questions/Answers
 
-**categoryTpl**     Name of the chunk to display your Category Headings (*category headings are not yet implemented)
+**setTpl**     Name of the chunk to display your FAQ set info
 
-**sortBy**          This allows you to choose which field to sort by (default is rank)
+**sortBy**          This allows you to choose which field to sort by (default is rank).  _NOTE: If you do not define the FAQ set to display, all FAQs will be shown. The sets are not currently orderable, only the FAQs inside each set._
 
 **sortDir**         ASC / DESC
 
-**limit**           Amount of Questions/Answers to display (default is to show all that are returned)
-
 **outputSeparator**	Separate each question/answer-pair by given string.
+
+**setOutputSeparator** Separate each FAQ set with the given string.
 
 
 ---
@@ -71,6 +100,7 @@ A more complex call would look like this:
     ]]
 
 ***
+
 ## Copyright Information
 
 Thanks to Niklas (https://github.com/nklsf) for revamping the instructions for me!

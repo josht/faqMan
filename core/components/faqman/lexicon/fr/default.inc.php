@@ -59,3 +59,5 @@ $_lang['faqman.intro_msg'] = 'Gérez vos questions.';
 $_lang['faqman.question'] = 'Question';
 $_lang['faqman.answer'] = 'Réponse';
 $_lang['faqman.toggle_answers'] = 'Afficher/masquer les réponses';
+
+$_lang['setting_faqman.use_richtext'] = 'Activer l\'éditeur de texte riche';
