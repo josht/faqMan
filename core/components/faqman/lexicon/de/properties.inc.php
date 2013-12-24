@@ -31,4 +31,5 @@ $_lang['prop_faqman.outputseparator_desc'] = 'String, um die Zeilen zu trennen.'
 $_lang['prop_faqman.sortby_desc'] = 'Sortierung nach Feld.';
 $_lang['prop_faqman.sortdir_desc'] = 'Sortierungsrichtung.';
 $_lang['prop_faqman.tpl_desc'] = 'Chunk für jeden Eintrag.';
+$_lang['prop_faqman.tplset_desc'] = 'Der chunk für den überschrift für jeden ausgestellte FAQsätze.';
 $_lang['prop_faqman.toplaceholder_desc'] = 'Falls gesetzt, wird der Inhalt in den hier angegebenen Platzhalter ausgegeben.';

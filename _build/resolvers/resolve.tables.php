@@ -28,7 +28,7 @@
 if ($object->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         case xPDOTransport::ACTION_INSTALL:
-            $modx =& $object->xpdo;
+            $modx      =& $object->xpdo;
             $modelPath = $modx->getOption('faqman.core_path',null,$modx->getOption('core_path').'components/faqman/').'model/';
             $modx->addPackage('faqman',$modelPath);
 
@@ -45,7 +45,7 @@ if ($object->xpdo) {
 
             break;
         case xPDOTransport::ACTION_UPGRADE:
-            $modx =& $object->xpdo;
+            $modx      =& $object->xpdo;
             $modelPath = $modx->getOption('faqman.core_path',null,$modx->getOption('core_path').'components/faqman/').'model/';
             $modx->addPackage('faqman',$modelPath);
 

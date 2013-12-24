@@ -4,59 +4,68 @@
  *
  * @package faqman
  */
-$faqMan = $modx->getService('faqman','faqMan',$modx->getOption('faqman.core_path',null,$modx->getOption('core_path').'components/faqman/').'model/faqman/',$scriptProperties);
+$faqMan = $modx->getService('faqman', 'faqMan', $modx->getOption('faqman.core_path', null, $modx->getOption('core_path').'components/faqman/').'model/faqman/', $scriptProperties);
 if (!($faqMan instanceof faqMan)) return '';
 
-$set = $modx->getOption('set',$scriptProperties,null);
-$tpl = $modx->getOption('tpl',$scriptProperties,'Faqs');
-$categoryTpl = $modx->getOption('categoryTpl',$scriptProperties,'categoryTpl');
-$sortBy = $modx->getOption('sortBy',$scriptProperties,'rank');
-$sortDir = $modx->getOption('sortDir',$scriptProperties,'ASC');
-$limit = $modx->getOption('limit',$scriptProperties,null);
-$showMenu = $modx->getOption('showMenu',$scriptProperties,false);
-$outputSeparator = $modx->getOption('outputSeparator',$scriptProperties,"\n");
+$set             = $modx->getOption('set', $scriptProperties, null);
+$tpl             = $modx->getOption('tpl', $scriptProperties, 'Faqs');
+$setTpl          = $modx->getOption('setTpl', $scriptProperties, null);
+$sortBy          = $modx->getOption('sortBy', $scriptProperties, 'rank');
+$sortDir         = $modx->getOption('sortDir', $scriptProperties, 'ASC');
+$limit           = $modx->getOption('limit', $scriptProperties, null);
+$showMenu        = $modx->getOption('showMenu', $scriptProperties, false);
+$outputSeparator = $modx->getOption('outputSeparator', $scriptProperties, "\n");
 
 /* build query */
-$c = $modx->newQuery('faqManItem');
-
+$c = $modx->newQuery('faqManSet');
 if (!empty($set)) {
     $c->where(array(
-        '`set`' => $set,
+        'id' => $set,
     ));
 } else {
-    $c->sortby('`set`','ASC');
+    $c->sortby('id','ASC');
 }
-
-$c->sortby($sortBy,$sortDir);
-
 if (!empty($limit)) $c->limit($limit);
 
-$items = $modx->getCollection('faqManItem',$c);
+// Get collection of FAQ sets based on query
+$sets = $modx->getCollection('faqManSet', $c);
 
-/* iterate through items */
+// Loop through found FAQ sets and build the output
 $list = array();
+foreach ($sets as $set) {
+    // Empty array to hold output from current set
+    $setList  = array();
+    $setArray = $set->toArray();
 
-/* show a menu of FAQ's that will link down to the actual FAQ */
-if ($showMenu) {
-    $modx->log(modX::LOG_LEVEL_ERROR, 'Option not implemented: showMenu');
-}
-
-foreach ($items as $item) {
-    $itemArray = $item->toArray();
-    if ($itemArray['type'] == faqMan::FAQ_TYPE_C) {
-        $list[] = $faqMan->getChunk($categoryTpl,$itemArray);
-    } else {
-        $list[] = $faqMan->getChunk($tpl,$itemArray);
+    // If no set template is defined, don't output set data
+    if (!empty($setTpl)) {
+        $setList[] = $faqMan->getChunk($setTpl, $setArray);
     }
+
+    // Loop through items and set output to array
+    $ci = $modx->newQuery('faqManItem');
+    $ci->sortby($sortBy, $sortDir);
+    foreach ($set->getMany('Item', $ci) as $item) {
+        $itemArray = $item->toArray();
+        if ($itemArray['type'] == faqMan::FAQ_TYPE_C) {
+            $setList[] = $faqMan->getChunk($categoryTpl, $itemArray);
+        } else {
+            $setList[] = $faqMan->getChunk($tpl, $itemArray);
+        }
+    }
+
+    // Collect output from this FAQ set.
+    $list[] = implode("\n", $setList);
 }
 
-/* output */
-$output = implode($outputSeparator,$list);
-$toPlaceholder = $modx->getOption('toPlaceholder',$scriptProperties,false);
+// Build output
+$output = implode($outputSeparator, $list);
+$toPlaceholder = $modx->getOption('toPlaceholder', $scriptProperties, false);
 if (!empty($toPlaceholder)) {
-    /* if using a placeholder, output nothing and set output to specified placeholder */
-    $modx->setPlaceholder($toPlaceholder,$output);
+    // If using a placeholder, output nothing and set output to specified placeholder
+    $modx->setPlaceholder($toPlaceholder, $output);
     return '';
 }
-/* by default just return output */
+
+// By default just return output
 return $output;

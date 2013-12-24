@@ -30,4 +30,5 @@ $_lang['prop_faqman.outputseparator_desc'] = 'A string to separate each row with
 $_lang['prop_faqman.sortby_desc'] = 'The field to sort by.';
 $_lang['prop_faqman.sortdir_desc'] = 'The direction to sort by.';
 $_lang['prop_faqman.tpl_desc'] = 'The chunk to use for each row of Items.';
+$_lang['prop_faqman.tplset_desc'] = 'The chunk to use for the heading of each displayed set of FAQs.';
 $_lang['prop_faqman.toplaceholder_desc'] = 'If set, will output the content to the placeholder specified in this property, rather than outputting the content directly.';

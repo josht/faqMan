@@ -5,6 +5,8 @@ Changelog for faqMan.
 - Support for multiple rich-text editors
 - Settings cleanup
 - Lexicon cleanup
+- Added optional output for set heading
+- Allow output of multiple FAQ sets with a single call
 
 FAQ Manager 1.0.6 pl
 =====================

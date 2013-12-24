@@ -30,4 +30,5 @@ $_lang['prop_faqman.outputseparator_desc'] = 'Caractère à utiliser pour sépar
 $_lang['prop_faqman.sortby_desc'] = 'Le champ utilisé pour classer les résultats.';
 $_lang['prop_faqman.sortdir_desc'] = 'L\'ordre d\'affichage.';
 $_lang['prop_faqman.tpl_desc'] = 'Le chunk à utiliser pour chaque résultat.';
+$_lang['prop_faqman.tplset_desc'] = 'The chunk to use for the heading of each displayed set of FAQs.';
 $_lang['prop_faqman.toplaceholder_desc'] = 'Si défini, affiche les résultats dans le placeholder indiqué au lieu de les afficher directement.';
