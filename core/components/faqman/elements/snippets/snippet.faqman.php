@@ -7,14 +7,15 @@
 $faqMan = $modx->getService('faqman', 'faqMan', $modx->getOption('faqman.core_path', null, $modx->getOption('core_path').'components/faqman/').'model/faqman/', $scriptProperties);
 if (!($faqMan instanceof faqMan)) return '';
 
-$set             = $modx->getOption('set', $scriptProperties, null);
-$tpl             = $modx->getOption('tpl', $scriptProperties, 'Faqs');
-$setTpl          = $modx->getOption('setTpl', $scriptProperties, null);
-$sortBy          = $modx->getOption('sortBy', $scriptProperties, 'rank');
-$sortDir         = $modx->getOption('sortDir', $scriptProperties, 'ASC');
-$limit           = $modx->getOption('limit', $scriptProperties, null);
-$showMenu        = $modx->getOption('showMenu', $scriptProperties, false);
-$outputSeparator = $modx->getOption('outputSeparator', $scriptProperties, "\n");
+$set                = $modx->getOption('set', $scriptProperties, null);
+$tpl                = $modx->getOption('tpl', $scriptProperties, 'Faqs');
+$setTpl             = $modx->getOption('setTpl', $scriptProperties, null);
+$sortBy             = $modx->getOption('sortBy', $scriptProperties, 'rank');
+$sortDir            = $modx->getOption('sortDir', $scriptProperties, 'ASC');
+$limit              = $modx->getOption('limit', $scriptProperties, null);
+$showMenu           = $modx->getOption('showMenu', $scriptProperties, false);
+$outputSeparator    = $modx->getOption('outputSeparator', $scriptProperties, "\n");
+$setOutputSeparator = $modx->getOption('setOutputSeparator', $scriptProperties, "\n");
 
 /* build query */
 $c = $modx->newQuery('faqManSet');
@@ -39,7 +40,7 @@ foreach ($sets as $set) {
 
     // If no set template is defined, don't output set data
     if (!empty($setTpl)) {
-        $setList[] = $faqMan->getChunk($setTpl, $setArray);
+        $setHeading = $faqMan->getChunk($setTpl, $setArray);
     }
 
     // Loop through items and set output to array
@@ -55,11 +56,16 @@ foreach ($sets as $set) {
     }
 
     // Collect output from this FAQ set.
-    $list[] = implode("\n", $setList);
+    if (isset($setHeading)) {
+        $list[] = $setHeading . "\n" . implode($outputSeparator, $setList);
+    } else {
+        $list[] = implode($outputSeparator, $setList);
+
+    }
 }
 
 // Build output
-$output = implode($outputSeparator, $list);
+$output        = implode($setOutputSeparator, $list);
 $toPlaceholder = $modx->getOption('toPlaceholder', $scriptProperties, false);
 if (!empty($toPlaceholder)) {
     // If using a placeholder, output nothing and set output to specified placeholder
