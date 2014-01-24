@@ -1,4 +1,3 @@
-
 faqMan.grid.Items = function(config) {
     config = config || {};
 
@@ -257,7 +256,8 @@ faqMan.window.CreateItem = function(config) {
             ,id: 'faqman-'+this.ident+'-answer'
             ,width: '94%'
             ,height: 250
-        }]
+        }],
+        buttons: [] //Prevent enter key from submitting the form
     });
     faqMan.window.CreateItem.superclass.constructor.call(this,config);
     this.on('activate',function() {
@@ -296,7 +296,8 @@ faqMan.window.UpdateItem = function(config) {
             ,id: 'faqman-'+this.ident+'-answer'
             ,width: '94%'
             ,height: 250
-        }]
+        }],
+        buttons: [] //Prevent enter key from submitting the form
     });
     faqMan.window.UpdateItem.superclass.constructor.call(this,config);
     this.on('activate',function() {
