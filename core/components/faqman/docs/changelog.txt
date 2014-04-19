@@ -1,5 +1,9 @@
 Changelog for faqMan.
 
+1.1.1 pl
+=====================
+- Enter shouldn't cause FAQ form to submit
+
 1.1 pl
 =====================
 - Support for multiple rich-text editors
@@ -27,3 +31,4 @@ faqMan 1.0.3 rc1
 - Questions & answers are now only limited by the size of TEXT
 - Fixed snippet property
 - Initial release.
+
