@@ -9,7 +9,7 @@ faqMan.panel.Set = function(config) {
             ,border: false
             ,cls: 'modx-page-header'
         },{
-            xtype: 'modx-tabs'
+            xtype: 'modx-panel'
             ,defaults: { border: false, autoHeight: true }
             ,border: true
             ,activeItem: 0
