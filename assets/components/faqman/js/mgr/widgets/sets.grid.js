@@ -123,6 +123,7 @@ faqMan.window.CreateSet = function(config) {
         ,id: this.ident
         ,height: 150
         ,width: 475
+        ,modal: true
         ,url: faqMan.config.connector_url
         ,action: 'mgr/set/create'
         ,fields: [{
@@ -152,6 +153,7 @@ faqMan.window.UpdateSet = function(config) {
         ,id: this.ident
         ,height: 150
         ,width: 475
+        ,modal: true
         ,url: faqMan.config.connector_url
         ,action: 'mgr/set/update'
         ,fields: [{
@@ -176,3 +178,4 @@ faqMan.window.UpdateSet = function(config) {
 };
 Ext.extend(faqMan.window.UpdateSet,MODx.Window);
 Ext.reg('faqman-window-set-update',faqMan.window.UpdateSet);
+

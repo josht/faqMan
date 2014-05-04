@@ -237,6 +237,7 @@ faqMan.window.CreateItem = function(config) {
         ,id: this.ident
         ,autoHeight: true
         ,width: 650
+        ,modal: true
         ,url: faqMan.config.connector_url
         ,closeAction: 'close'
         ,baseParams: {
@@ -276,6 +277,7 @@ faqMan.window.UpdateItem = function(config) {
         ,id: this.ident
         ,autoHeight: true
         ,width: 650
+        ,modal: true
         ,url: faqMan.config.connector_url
         ,action: 'mgr/item/update'
         ,closeAction: 'close'
@@ -306,3 +308,4 @@ faqMan.window.UpdateItem = function(config) {
 };
 Ext.extend(faqMan.window.UpdateItem,MODx.Window);
 Ext.reg('faqman-window-item-update',faqMan.window.UpdateItem);
+
