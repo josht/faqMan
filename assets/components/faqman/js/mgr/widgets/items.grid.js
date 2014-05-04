@@ -173,11 +173,11 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         });
         this.addContextMenuItem(m);
     }
-    
+
     ,createItem: function(btn,e) {
         if (!this.config || !this.config.setid) return false;
         var s = this.config.setid;
-        
+
         this.windows.createItem = MODx.load({
             xtype: 'faqman-window-item-create'
             ,set: s
@@ -201,10 +201,10 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         this.windows.updateItem.fp.getForm().setValues(r);
         this.windows.updateItem.show(e.target);
     }
-    
+
     ,removeItem: function(btn,e) {
         if (!this.menu.record) return false;
-        
+
         MODx.msg.confirm({
             title: _('faqman.item_remove')
             ,text: _('faqman.item_remove_confirm')
@@ -257,7 +257,7 @@ faqMan.window.CreateItem = function(config) {
             ,width: '94%'
             ,height: 250
         }],
-        buttons: [] //Prevent enter key from submitting the form
+        keys: [] //Prevent enter key from submitting the form
     });
     faqMan.window.CreateItem.superclass.constructor.call(this,config);
     this.on('activate',function() {
@@ -297,7 +297,7 @@ faqMan.window.UpdateItem = function(config) {
             ,width: '94%'
             ,height: 250
         }],
-        buttons: [] //Prevent enter key from submitting the form
+        keys: [] //Prevent enter key from submitting the form
     });
     faqMan.window.UpdateItem.superclass.constructor.call(this,config);
     this.on('activate',function() {
