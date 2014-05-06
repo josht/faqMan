@@ -1,6 +1,12 @@
 faqMan.grid.Items = function(config) {
     config = config || {};
 
+    this.exp = new Ext.grid.RowExpander({
+        tpl: new Ext.Template(
+            '<p>{answer}</p>'
+        )
+    });
+
     Ext.applyIf(config,{
         id: 'faqman-grid-items'
         ,url: faqMan.config.connector_url
@@ -14,6 +20,8 @@ faqMan.grid.Items = function(config) {
         ,enableDragDrop: true
         ,remoteSort: false
         ,autosave: true
+        ,autoExpandColumn: 'answer'
+        ,plugins: [this.exp]
         ,viewConfig: {
             forceFit:true
             ,enableRowBody:true
@@ -24,20 +32,15 @@ faqMan.grid.Items = function(config) {
             field: 'rank'
             ,direction: 'ASC'
         }
-        ,columns: [{/*
+        ,columns: [this.exp, {
             header: _('id')
             ,dataIndex: 'id'
-            ,width: 70
-        },{*/
+            ,width: 10
+        },{
             header: _('faqman.question')
             ,dataIndex: 'question'
             ,width: 300
             ,renderer: this.formatTitle
-        },{
-            header: _('faqman.answer')
-            ,dataIndex: 'answer'
-            ,hidden:true
-            ,width: 300
         }]
         ,listeners: {
             "render": {
@@ -71,14 +74,6 @@ faqMan.grid.Items = function(config) {
             text: _('faqman.item_create')
             ,handler: this.createItem
             ,scope: this
-        },'-',{
-            pressed: true
-            ,enableToggle:true
-            ,text: _('faqman.toggle_answers')
-            ,scope:this
-            ,toggleHandler: function(btn, pressed) {
-                this.togglePreview(pressed);
-            }
         },'->',{
             xtype: 'textfield'
             ,name: 'search'
@@ -156,10 +151,6 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         this.refresh();
         return true;
     }
-    ,togglePreview: function(show) {
-        this.config.viewConfig.showPreview = show;
-        this.refresh();
-    }
     ,getMenu: function() {
         var m = [];
         m.push({
@@ -187,6 +178,7 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         });
         this.windows.createItem.show(e.target);
     }
+
     ,updateItem: function(btn,e) {
         if (!this.menu.record || !this.menu.record.id) return false;
         var r = this.menu.record;
