@@ -3,7 +3,7 @@ faqMan.grid.Items = function(config) {
 
     this.exp = new Ext.grid.RowExpander({
         tpl: new Ext.Template(
-            '<p>{answer}</p>'
+            '<p class="answer">{answer}</p>'
         )
     });
 
@@ -14,12 +14,15 @@ faqMan.grid.Items = function(config) {
             action: 'mgr/item/getlist'
             ,set: config.setid
         }
-        ,fields: ['id','question','answer','set','rank']
+        ,fields: ['id', 'question', 'answer', 'set', 'rank', 'actions']
         ,paging: true
         ,ddGroup: 'mygridDD'
         ,enableDragDrop: true
         ,remoteSort: false
+        ,cls: 'faq-grid'
+        ,bodyCssClass: 'grid-with-buttons'
         ,autosave: true
+        ,preventRender: true
         ,autoExpandColumn: 'answer'
         ,plugins: [this.exp]
         ,viewConfig: {
@@ -33,14 +36,9 @@ faqMan.grid.Items = function(config) {
             ,direction: 'ASC'
         }
         ,columns: [this.exp, {
-            header: _('id')
-            ,dataIndex: 'id'
-            ,width: 10
-        },{
             header: _('faqman.question')
             ,dataIndex: 'question'
-            ,width: 300
-            ,renderer: this.formatTitle
+            ,renderer: {fn:this._renderQuestion, scope: this}
         }]
         ,listeners: {
             "render": {
@@ -102,8 +100,10 @@ faqMan.grid.Items = function(config) {
         }]
     });
     faqMan.grid.Items.superclass.constructor.call(this,config);
+    this._makeTemplate();
     this.addEvents('sort');
     this.on('sort',this.onSort,this);
+//    this.on('click', this.handleButtons, this);
 };
 Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
     windows: {}
@@ -124,6 +124,22 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
             }
         });
     }
+
+    ,_makeTemplate: function() {
+        this.tplQuestion = new Ext.XTemplate('<tpl for="."><div class="faq-question-column">'
+                                            +'<h3 class="main-column"><a href="{action_edit}" title="Edit {question}">{question}</a><span class="question-id">({id})</span></h3>'
+                                                +'<tpl if="actions">'
+                                                    +'<ul class="actions">'
+                                                        +'<tpl for="actions">'
+                                                            +'<li><a href="#" class="controlBtn {className}">{text}</a></li>'
+                                                        +'</tpl>'
+                                                    +'</ul>'
+                                                +'</tpl>'
+                                            +'</div></tpl>', {
+            compiled: true
+        });
+    }
+
     ,applyRowClass: function(record, rowIndex, p, ds) {
         if (this.grid.viewConfig.showPreview) {
             var xf = Ext.util.Format;
@@ -211,11 +227,8 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         });
     }
 
-    ,formatTitle: function(value, p, record) {
-        return String.format(
-                '<div class="title"><b>{0}</b></div>',
-                value
-        );
+    ,_renderQuestion: function(value, p, record) {
+        return this.tplQuestion.apply(record.data);
     }
 });
 Ext.reg('faqman-grid-items',faqMan.grid.Items);
