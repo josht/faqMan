@@ -64,15 +64,17 @@ $items = $modx->getCollection('faqManItem',$c);
 $list = array();
 foreach ($items as $item) {
   $itemArray = $item->toArray();
-    $modx->setLogLevel(modX::LOG_LEVEL_INFO);
-    $modx->log(modX::LOG_LEVEL_INFO, print_r($itemArray, true));
-    $modx->setLogLevel(modX::LOG_LEVEL_FATAL);
+  $modx->log(modX::LOG_LEVEL_INFO, print_r($itemArray, true));
   $list[]= array_merge(
       $itemArray,
       array('actions' => array(
           array(
               'className' => 'edit',
               'text'      => 'Edit'
+          ),
+          array(
+              'className' => 'delete',
+              'text'      => 'Delete'
           ),
           array(
               'className' => ($itemArray['published']) ? 'unpublish' : 'publish orange',

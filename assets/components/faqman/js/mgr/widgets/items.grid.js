@@ -103,7 +103,7 @@ faqMan.grid.Items = function(config) {
     this._makeTemplate();
     this.addEvents('sort');
     this.on('sort',this.onSort,this);
-//    this.on('click', this.handleButtons, this);
+    this.on('click', this.handleButtons, this);
 };
 Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
     windows: {}
@@ -148,11 +148,6 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         }
         return 'x-grid3-row-collapsed';
     }
-    ,_addEnterKeyHandler: function() {
-        this.getEl().addKeyListener(Ext.EventObject.ENTER,function() {
-            this.fireEvent('change');
-        },this);
-    }
     ,clearFilter: function() {
         var s = this.getStore();
         s.baseParams.search = '';
@@ -161,8 +156,7 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         this.refresh();
     }
     ,search: function(tf,newValue,oldValue) {
-        var nv = newValue || tf;
-        this.getStore().baseParams.search = nv;
+        this.getStore().baseParams.search = newValue || tf;
         this.getBottomToolbar().changePage(1);
         this.refresh();
         return true;
@@ -229,6 +223,59 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
 
     ,_renderQuestion: function(value, p, record) {
         return this.tplQuestion.apply(record.data);
+    }
+    ,publishItem: function() {
+        MODx.Ajax.request({
+            url: faqMan.config.connector_url
+            ,params: {
+                action: 'mgr/item/publish'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn: this.refresh, scope: this}
+            }
+        });
+        return true;
+
+    }
+    ,unpublishItem: function(record) {
+        MODx.Ajax.request({
+            url: faqMan.config.connector_url
+            ,params: {
+                action: 'mgr/item/unpublish'
+                ,id: this.menu.record.id
+            }
+            ,listeners: {
+                'success': {fn: this.refresh, scope: this}
+            }
+        });
+        return true;
+    }
+
+    ,handleButtons: function(e) {
+        var target  = e.getTarget();
+        var element = target.className.split(' ')[0];
+        if (element == 'controlBtn') {
+            var action       = target.className.split(' ')[1];
+            var record       = this.getSelectionModel().getSelected().data;
+            this.menu.record = record;
+            switch (action) {
+                case 'edit':
+                    this.updateItem(null, e);
+                    break;
+                case 'publish':
+                    this.publishItem();
+                    break;
+                case 'unpublish':
+                    this.unpublishItem();
+                    break;
+                case 'delete':
+                    this.removeItem();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 });
 Ext.reg('faqman-grid-items',faqMan.grid.Items);
