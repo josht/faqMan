@@ -5,6 +5,7 @@
     <object class="faqManSet" table="faqman_set" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="description" dbtype="text" phptype="text" null="false" default="" />
+        <field key="rank" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="0" />
 
         <composite alias="Item" class="faqManItem" local="id" foreign="set" cardinality="many" owner="local" />
     </object>

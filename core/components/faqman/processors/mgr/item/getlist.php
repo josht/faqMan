@@ -64,7 +64,6 @@ $items = $modx->getCollection('faqManItem',$c);
 $list = array();
 foreach ($items as $item) {
   $itemArray = $item->toArray();
-  $modx->log(modX::LOG_LEVEL_INFO, print_r($itemArray, true));
   $list[]= array_merge(
       $itemArray,
       array('actions' => array(

@@ -11,6 +11,7 @@ $xpdo_meta_map['faqManSet']= array (
   array (
     'name' => '',
     'description' => '',
+    'rank' => '',
   ),
   'fieldMeta' => 
   array (
@@ -28,6 +29,15 @@ $xpdo_meta_map['faqManSet']= array (
       'phptype' => 'text',
       'null' => false,
       'default' => '',
+    ),
+    'rank' =>
+    array (
+      'dbtype' => 'integer',
+      'precision' => '5',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 0,
     ),
   ),
   'composites' => 
