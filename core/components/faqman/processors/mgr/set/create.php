@@ -39,6 +39,10 @@ if ($modx->error->hasError()) {
 $set = $modx->newObject('faqManSet');
 $set->fromArray($_POST);
 
+// Set rank to last in list
+$total = $modx->getCount('faqManSet');
+$set->set('rank',$total);
+
 if ($set->save() == false) {
     return $modx->error->failure($modx->lexicon('faqman.set_err_save'));
 }

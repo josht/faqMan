@@ -30,9 +30,23 @@ if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon(
 $set = $modx->getObject('faqManSet',$scriptProperties['id']);
 if (!$set) return $modx->error->failure($modx->lexicon('faqman.set_err_nf'));
 
+$rank = $set->get('rank');
+
 if ($set->remove() == false) {
     return $modx->error->falure($modx->lexicon('faqman.set_err_remove'));
 }
 
+/* If we made it here, then the set has been deleted. We now need to go through
+ * each item below the removed spot and decrease each rank by 1 to make sure
+ * ranks don't get messed up if we add an item after one has been removed
+ */
+$modx->exec("
+    UPDATE {$modx->getTableName('faqManSet')}
+      SET rank = rank - 1
+    WHERE
+    AND rank > {$rank}
+    AND rank > 0
+");
+
 /* output */
-return $modx->error->success('',$item);
+return $modx->error->success('',$set);

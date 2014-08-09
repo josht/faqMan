@@ -34,8 +34,8 @@ set_time_limit(0);
 // Define package
 define('PKG_NAME','faqMan');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','1.1.1');
-define('PKG_RELEASE','pl');
+define('PKG_VERSION','1.2');
+define('PKG_RELEASE','beta');
 
 // Define sources
 $root    = dirname(dirname(__FILE__)) . '/';
@@ -44,20 +44,20 @@ $sources = array(
     'build'         => $root . '_build/',
     'data'          => $root . '_build/data/',
     'resolvers'     => $root . '_build/resolvers/',
-    'chunks'        => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/chunks/',
-    'snippets'      => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/snippets/',
-    'plugins'       => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/plugins/',
-    'lexicon'       => $root . 'core/components/' . PKG_NAME_LOWER . '/lexicon/',
-    'docs'          => $root . 'core/components/' . PKG_NAME_LOWER . '/docs/',
-    'pages'         => $root . 'core/components/' . PKG_NAME_LOWER . '/elements/pages/',
+    'chunks'        => $root . 'core/components/'   . PKG_NAME_LOWER . '/elements/chunks/',
+    'snippets'      => $root . 'core/components/'   . PKG_NAME_LOWER . '/elements/snippets/',
+    'plugins'       => $root . 'core/components/'   . PKG_NAME_LOWER . '/elements/plugins/',
+    'lexicon'       => $root . 'core/components/'   . PKG_NAME_LOWER . '/lexicon/',
+    'docs'          => $root . 'core/components/'   . PKG_NAME_LOWER . '/docs/',
+    'pages'         => $root . 'core/components/'   . PKG_NAME_LOWER . '/elements/pages/',
     'source_assets' => $root . 'assets/components/' . PKG_NAME_LOWER,
-    'source_core'   => $root . 'core/components/' . PKG_NAME_LOWER,
+    'source_core'   => $root . 'core/components/'   . PKG_NAME_LOWER,
 );
 unset($root);
 
 /* override with your own defines here (see build.config.sample.php) */
 require_once $sources['build'] . '/build.config.php';
-require_once MODX_CORE_PATH . 'model/modx/modx.class.php';
+require_once MODX_CORE_PATH    . 'model/modx/modx.class.php';
 require_once $sources['build'] . '/includes/functions.php';
 
 $modx = new modX();

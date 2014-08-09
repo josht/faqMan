@@ -43,6 +43,10 @@ if ($object->xpdo) {
                 `question` TEXT NOT NULL DEFAULT '';
             ");
 
+            $modx->setLogLevel(modX::LOG_LEVEL_INFO);
+            $modx->log(modX::LOG_LEVEL_INFO, 'xPDOTransport::ACTION_INSTALL');
+            $modx->setLogLevel(modX::LOG_LEVEL_FATAL);
+
             break;
         case xPDOTransport::ACTION_UPGRADE:
             $modx      =& $object->xpdo;
@@ -54,7 +58,10 @@ if ($object->xpdo) {
                 CHANGE `question`
                 `question` TEXT NOT NULL DEFAULT '';
             ");
-            
+            $modx->setLogLevel(modX::LOG_LEVEL_INFO);
+            $modx->log(modX::LOG_LEVEL_INFO, 'xPDOTransport::ACTION_UPGRADE');
+            $modx->setLogLevel(modX::LOG_LEVEL_FATAL);
+
             break;
     }
 }

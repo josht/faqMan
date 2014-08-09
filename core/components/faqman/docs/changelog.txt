@@ -1,5 +1,13 @@
 Changelog for faqMan.
 
+1.2
+=====================
+- Popup editor is now a modal
+- Fixed search
+- Now using a row expander so a single question/answer can be expanded
+- You can now mark questions as published/unpublished
+- Sets can be sorted
+
 1.1.1 pl
 =====================
 - Enter shouldn't cause FAQ form to submit
