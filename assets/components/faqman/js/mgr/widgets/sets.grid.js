@@ -7,14 +7,16 @@ faqMan.grid.Sets = function(config) {
         ,baseParams: {
             action: 'mgr/set/getlist'
         }
-        ,fields: ['id','name','description']
+        ,fields: ['id','name','description','rank']
         ,autoHeight: true
         ,paging: true
+        ,ddGroup: 'mygridDD'
+        ,enableDragDrop: true
         ,remoteSort: true
         ,columns: [ {
                 header: _('id')
                 ,dataIndex: 'id'
-                ,width: 70
+                ,width: 20
         },{
             header: _('name')
             ,dataIndex: 'name'
@@ -23,7 +25,39 @@ faqMan.grid.Sets = function(config) {
             header: _('description')
             ,dataIndex: 'description'
             ,width: 250
+        },{
+                header: _('rank')
+                ,dataIndex: 'rank'
+                ,width: 25
         }]
+        ,listeners: {
+            "render": {
+                scope: this
+                ,fn: function(grid) {
+                    var ddrow = new Ext.dd.DropTarget(grid.container, {
+                        ddGroup: 'mygridDD'
+                        ,copy: false
+                        ,notifyDrop: function(dd, e, data) { // thing being dragged, event, data from dagged source
+                            var ds = grid.store;
+                            var sm = grid.getSelectionModel();
+                            rows   = sm.getSelections();
+
+                            if (dd.getDragData(e)) {
+                                var targetNode = dd.getDragData(e).selections[0];
+                                var sourceNode = data.selections[0];
+
+                                grid.fireEvent('sort',{
+                                    target: targetNode
+                                    ,source: sourceNode
+                                    ,event: e
+                                    ,dd: dd
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+        }
         ,tbar: [{
             text: _('faqman.set_create')
             ,handler: this.createSet
@@ -31,10 +65,28 @@ faqMan.grid.Sets = function(config) {
         }]
     });
     faqMan.grid.Sets.superclass.constructor.call(this,config);
+    this.addEvents('sort');
+    this.on('sort',this.onSort,this);
 };
 Ext.extend(faqMan.grid.Sets,MODx.grid.Grid,{
     windows: {}
 
+    ,onSort: function(o) {
+        console.log(o.source.id);
+        MODx.Ajax.request({
+            url: this.config.url
+            ,params: {
+                action: 'mgr/set/sort'
+                ,source: o.source.id
+                ,target: o.target.id
+            }
+            ,listeners: {
+                'success':{fn:function(r) {
+                    this.refresh();
+                },scope:this}
+            }
+        });
+    }
     ,getMenu: function() {
         var m = [];
         m.push({

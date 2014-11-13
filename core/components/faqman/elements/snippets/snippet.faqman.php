@@ -13,6 +13,7 @@ $setTpl             = $modx->getOption('setTpl', $scriptProperties, null);
 $sortBy             = $modx->getOption('sortBy', $scriptProperties, 'rank');
 $sortDir            = $modx->getOption('sortDir', $scriptProperties, 'ASC');
 $limit              = $modx->getOption('limit', $scriptProperties, null);
+$hideUnpublished    = $modx->getOption('hideUnpublished', $scriptProperties, true);
 $showMenu           = $modx->getOption('showMenu', $scriptProperties, false);
 $outputSeparator    = $modx->getOption('outputSeparator', $scriptProperties, "\n");
 $setOutputSeparator = $modx->getOption('setOutputSeparator', $scriptProperties, "\n");
@@ -45,6 +46,12 @@ foreach ($sets as $set) {
 
     // Loop through items and set output to array
     $ci = $modx->newQuery('faqManItem');
+
+    // Hide unpublished items
+    if ($hideUnpublished) {
+        $ci->where(array('published' => 1));
+    }
+
     $ci->sortby($sortBy, $sortDir);
     foreach ($set->getMany('Item', $ci) as $item) {
         $itemArray = $item->toArray();

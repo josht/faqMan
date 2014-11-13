@@ -64,6 +64,22 @@ $items = $modx->getCollection('faqManItem',$c);
 $list = array();
 foreach ($items as $item) {
   $itemArray = $item->toArray();
-  $list[]= $itemArray;
+  $list[]= array_merge(
+      $itemArray,
+      array('actions' => array(
+          array(
+              'className' => 'edit',
+              'text'      => 'Edit'
+          ),
+          array(
+              'className' => 'delete',
+              'text'      => 'Delete'
+          ),
+          array(
+              'className' => ($itemArray['published']) ? 'unpublish' : 'publish orange',
+              'text'      => ($itemArray['published']) ? 'Unpublish' : 'Publish'
+          )
+      ))
+  );
 }
 return $this->outputArray($list,$count);

@@ -20,28 +20,23 @@
  * @package faqman
  */
 /**
- * Get a list of FAQ sets
- *
+ * Publish an Item
+ * 
  * @package faqman
  * @subpackage processors
  */
-$isLimit = !empty($_REQUEST['limit']);
-$start   = $modx->getOption('start',$_REQUEST,0);
-$limit   = $modx->getOption('limit',$_REQUEST,20);
-$sort    = $modx->getOption('sort',$_REQUEST,'rank');
-$dir     = $modx->getOption('dir',$_REQUEST,'ASC');
+/* get item */
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.item_err_ns'));
+$item = $modx->getObject('faqManItem',$scriptProperties['id']);
+if (!$item) return $modx->error->failure($modx->lexicon('faqman.item_err_nf'));
 
-// Build query
-$c     = $modx->newQuery('faqManSet');
-$count = $modx->getCount('faqManSet',$c);
-$c->sortby($sort, $dir);
-if ($isLimit) $c->limit($limit,$start);
-$sets = $modx->getCollection('faqManSet',$c);
+// Mark as published
+$item->set('published', 1);
 
-// Build output and return
-$list = array();
-foreach ($sets as $set) {
-    $setArray = $set->toArray();
-    $list[]   = $setArray;
+if ($item->save() == false) {
+    return $modx->error->failure($modx->lexicon('faqman.item_err_save'));
 }
-return $this->outputArray($list,$count);
+
+/* output */
+$itemArray = $item->toArray('',true);
+return $modx->error->success('',$itemArray);
