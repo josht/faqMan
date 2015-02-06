@@ -193,6 +193,9 @@ faqMan.window.CreateSet = function(config) {
         }]
     });
     faqMan.window.CreateSet.superclass.constructor.call(this,config);
+    this.on('activate',function(w,e) {
+        MODx.loadRTE('faqman-'+this.ident+'-description');
+    },this);
 };
 Ext.extend(faqMan.window.CreateSet,MODx.Window);
 Ext.reg('faqman-window-set-create',faqMan.window.CreateSet);
@@ -227,6 +230,9 @@ faqMan.window.UpdateSet = function(config) {
         }]
     });
     faqMan.window.UpdateSet.superclass.constructor.call(this,config);
+    this.on('activate',function(w,e) {
+        MODx.loadRTE('faqman-'+this.ident+'-description');
+    },this);
 };
 Ext.extend(faqMan.window.UpdateSet,MODx.Window);
 Ext.reg('faqman-window-set-update',faqMan.window.UpdateSet);
