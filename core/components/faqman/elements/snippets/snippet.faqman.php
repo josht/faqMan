@@ -8,6 +8,7 @@ $faqMan = $modx->getService('faqman', 'faqMan', $modx->getOption('faqman.core_pa
 if (!($faqMan instanceof faqMan)) return '';
 
 $set                = $modx->getOption('set', $scriptProperties, null);
+$sets                = $modx->getOption('sets', $scriptProperties, null);
 $tpl                = $modx->getOption('tpl', $scriptProperties, 'Faqs');
 $setTpl             = $modx->getOption('setTpl', $scriptProperties, null);
 $sortBy             = $modx->getOption('sortBy', $scriptProperties, 'rank');
@@ -24,6 +25,11 @@ if (!empty($set)) {
     $c->where(array(
         'id' => $set,
     ));
+} else if (!empty($sets)) {
+    $c->where(array(
+        'id:IN' => explode(',', $sets),
+    ));
+    $c->sortby('id','ASC');
 } else {
     $c->sortby('id','ASC');
 }
