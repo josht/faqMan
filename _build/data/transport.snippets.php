@@ -37,4 +37,13 @@ $properties = include $sources['build'].'properties/properties.faqman.php';
 $snippets[0]->setProperties($properties);
 unset($properties);
 
+$snippets[1]= $modx->newObject('modSnippet');
+$snippets[1]->fromArray(array(
+    'id'          => 1,
+    'name'        => 'faqManSets',
+    'description' => 'Displays FAQs sets and their questions.',
+    'snippet'     => getSnippetContent($sources['source_core'].'/elements/snippets/snippet.faqmansets.php'),
+), '', true, true);
+unset($properties);
+
 return $snippets;
