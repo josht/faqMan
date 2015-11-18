@@ -7,17 +7,18 @@
 $faqMan = $modx->getService('faqman', 'faqMan', $modx->getOption('faqman.core_path', null, $modx->getOption('core_path').'components/faqman/').'model/faqman/', $scriptProperties);
 if (!($faqMan instanceof faqMan)) return '';
 
-$set                = $modx->getOption('set', $scriptProperties, null);
+$set                 = $modx->getOption('set', $scriptProperties, null);
 $sets                = $modx->getOption('sets', $scriptProperties, null);
-$tpl                = $modx->getOption('tpl', $scriptProperties, 'Faqs');
-$setTpl             = $modx->getOption('setTpl', $scriptProperties, null);
-$sortBy             = $modx->getOption('sortBy', $scriptProperties, 'rank');
-$sortDir            = $modx->getOption('sortDir', $scriptProperties, 'ASC');
-$limit              = $modx->getOption('limit', $scriptProperties, null);
-$hideUnpublished    = $modx->getOption('hideUnpublished', $scriptProperties, true);
-$showMenu           = $modx->getOption('showMenu', $scriptProperties, false);
-$outputSeparator    = $modx->getOption('outputSeparator', $scriptProperties, "\n");
-$setOutputSeparator = $modx->getOption('setOutputSeparator', $scriptProperties, "\n");
+$tpl                 = $modx->getOption('tpl', $scriptProperties, 'Faqs');
+$setTpl              = $modx->getOption('setTpl', $scriptProperties, null);
+$sortBy              = $modx->getOption('sortBy', $scriptProperties, 'rank');
+$sortDir             = $modx->getOption('sortDir', $scriptProperties, 'ASC');
+$limit               = $modx->getOption('limit', $scriptProperties, null);
+$hideUnpublishedSets = $modx->getOption('hideUnpublishedSets', $scriptProperties, true);
+$hideUnpublished     = $modx->getOption('hideUnpublished', $scriptProperties, true);
+$showMenu            = $modx->getOption('showMenu', $scriptProperties, false);
+$outputSeparator     = $modx->getOption('outputSeparator', $scriptProperties, "\n");
+$setOutputSeparator  = $modx->getOption('setOutputSeparator', $scriptProperties, "\n");
 
 /* build query */
 $c = $modx->newQuery('faqManSet');
@@ -32,6 +33,11 @@ if (!empty($set)) {
     $c->sortby('id','ASC');
 } else {
     $c->sortby('id','ASC');
+}
+if ($hideUnpublishedSets) {
+    $c->where(array(
+        'published' => true
+    ));
 }
 if (!empty($limit)) $c->limit($limit);
 
