@@ -35,8 +35,8 @@ $dir     = $modx->getOption('dir',$_REQUEST,'ASC');
 $c     = $modx->newQuery('faqManSet');
 $count = $modx->getCount('faqManSet',$c);
 $c->sortby($sort, $dir);
-if ($isLimit) $c->limit($limit,$start);
-$sets = $modx->getCollection('faqManSet',$c);
+if ($isLimit) $c->limit($limit, $start);
+$sets = $modx->getCollection('faqManSet', $c);
 
 // Build output and return
 $list = array();
@@ -44,4 +44,4 @@ foreach ($sets as $set) {
     $setArray = $set->toArray();
     $list[]   = $setArray;
 }
-return $this->outputArray($list,$count);
+return $this->outputArray($list, $count);

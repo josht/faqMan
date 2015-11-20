@@ -19,6 +19,7 @@ $limit = $modx->getOption('limit',$scriptProperties,null);
 $limitQuestions = $modx->getOption('limitQuestions',$scriptProperties,5);
 $outputSeparator = $modx->getOption('outputSeparator',$scriptProperties,"\n");
 $questionOutputSeparator = $modx->getOption('questionOutputSeparator',$scriptProperties,"\n");
+$showUnpublished = $modx->getOption('showUnpublished', $scriptProperties, false);
 
 /* build query */
 $c = $modx->newQuery('faqManSet');
@@ -28,6 +29,11 @@ if (!empty($set)) {
     $c->where(array(
         $field => $set,
     ));
+
+    // Hide unpublished sets
+    if (!$showUnpublished) {
+        $c->where(array('published' => true));
+    }
 }
 
 $c->sortby($sortBy,$sortDir);
@@ -42,14 +48,16 @@ foreach ($items as $item) {
     $si++;
     $itemArray = $item->toArray();
     $itemArray['setidx'] = $si;
-    
-    
+
     // get faqManItems of this set
     $criteria = $modx->newQuery('faqManItem');
+    if (!$showUnpublished) {
+        $criteria->where(array('published' => true));
+    }
     $criteria->sortby('rank','ASC');
     $criteria->limit($limitQuestions);
     $questions = $item->getMany('Item',$criteria);
-    
+
     $questionlist = array();
     $qi = 0;
     foreach ($questions as $q) {
@@ -60,8 +68,7 @@ foreach ($items as $item) {
 	    $questionlist[] = $faqMan->getChunk($questionTpl,$qArray);
     }
     $itemArray['questions'] = implode($questionOutputSeparator,$questionlist);
-    
-    
+
     $list[] = $faqMan->getChunk($tpl,$itemArray);
 }
 

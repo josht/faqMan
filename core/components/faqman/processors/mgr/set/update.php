@@ -27,7 +27,7 @@
  */
 /* get board */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.set_err_ns'));
-$set = $modx->getObject('faqManSet',$scriptProperties['id']);
+$set = $modx->getObject('faqManSet', $scriptProperties['id']);
 if (!$set) return $modx->error->failure($modx->lexicon('faqman.item_err_nf'));
 
 $set->fromArray($scriptProperties);
@@ -37,5 +37,5 @@ if ($set->save() == false) {
 }
 
 /* output */
-$setArray = $set->toArray('',true);
-return $modx->error->success('',$setArray);
+$setArray = $set->toArray('', true);
+return $modx->error->success('', $setArray);

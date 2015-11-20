@@ -26,14 +26,15 @@
  * @package faqman
  * @subpackage processors
  */
-$source = $modx->getObject('faqManSet',array(
+$source = $modx->getObject('faqManSet', array(
     'id' => $_POST['source'],
 ));
 if (empty($source)) return $modx->error->failure();
 
-$target = $modx->getObject('faqManSet',array(
+$target = $modx->getObject('faqManSet', array(
     'id' => $_POST['target'],
 ));
+
 if (empty($target)) return $modx->error->failure();
 
 if ($source->get('rank') < $target->get('rank')) {
@@ -56,7 +57,7 @@ if ($source->get('rank') < $target->get('rank')) {
     ");
     $newRank = $target->get('rank');
 }
-$source->set('rank',$newRank);
+$source->set('rank', $newRank);
 $source->save();
 
 return $modx->error->success();

@@ -27,7 +27,7 @@
  */
 /* get board */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.set_err_ns'));
-$set = $modx->getObject('faqManSet',$scriptProperties['id']);
+$set = $modx->getObject('faqManSet', $scriptProperties['id']);
 if (!$set) return $modx->error->failure($modx->lexicon('faqman.set_err_nf'));
 
 if ($set->remove() == false) {
@@ -35,4 +35,4 @@ if ($set->remove() == false) {
 }
 
 /* output */
-return $modx->error->success('',$item);
+return $modx->error->success('', $set);

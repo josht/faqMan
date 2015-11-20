@@ -4,24 +4,29 @@
  *
  * @package faqman
  */
-$faqMan = $modx->getService('faqman', 'faqMan', $modx->getOption('faqman.core_path', null, $modx->getOption('core_path').'components/faqman/').'model/faqman/', $scriptProperties);
+$faqMan = $modx->getService(
+    'faqman',
+    'faqMan',
+    $modx->getOption('faqman.core_path', null, $modx->getOption('core_path').'components/faqman/').'model/faqman/',
+    $scriptProperties
+);
 if (!($faqMan instanceof faqMan)) return '';
 
-$set                 = $modx->getOption('set', $scriptProperties, null);
-$sets                = $modx->getOption('sets', $scriptProperties, null);
-$tpl                 = $modx->getOption('tpl', $scriptProperties, 'Faqs');
-$setTpl              = $modx->getOption('setTpl', $scriptProperties, null);
-$sortBy              = $modx->getOption('sortBy', $scriptProperties, 'rank');
-$sortDir             = $modx->getOption('sortDir', $scriptProperties, 'ASC');
-$limit               = $modx->getOption('limit', $scriptProperties, null);
-$hideUnpublishedSets = $modx->getOption('hideUnpublishedSets', $scriptProperties, true);
-$hideUnpublished     = $modx->getOption('hideUnpublished', $scriptProperties, true);
-$showMenu            = $modx->getOption('showMenu', $scriptProperties, false);
-$outputSeparator     = $modx->getOption('outputSeparator', $scriptProperties, "\n");
-$setOutputSeparator  = $modx->getOption('setOutputSeparator', $scriptProperties, "\n");
+$set                = $modx->getOption('set', $scriptProperties, null);
+$sets               = $modx->getOption('sets', $scriptProperties, null);
+$tpl                = $modx->getOption('tpl', $scriptProperties, 'Faqs');
+$setTpl             = $modx->getOption('setTpl', $scriptProperties, null);
+$sortBy             = $modx->getOption('sortBy', $scriptProperties, 'rank');
+$sortDir            = $modx->getOption('sortDir', $scriptProperties, 'ASC');
+$limit              = $modx->getOption('limit', $scriptProperties, null);
+$showUnpublished    = $modx->getOption('showUnpublished', $scriptProperties, false);
+$showMenu           = $modx->getOption('showMenu', $scriptProperties, false);
+$outputSeparator    = $modx->getOption('outputSeparator', $scriptProperties, "\n");
+$setOutputSeparator = $modx->getOption('setOutputSeparator', $scriptProperties, "\n");
 
 /* build query */
 $c = $modx->newQuery('faqManSet');
+
 if (!empty($set)) {
     $c->where(array(
         'id' => $set,
@@ -34,7 +39,7 @@ if (!empty($set)) {
 } else {
     $c->sortby('id','ASC');
 }
-if ($hideUnpublishedSets) {
+if (!$showUnpublished) {
     $c->where(array(
         'published' => true
     ));
@@ -60,18 +65,14 @@ foreach ($sets as $set) {
     $ci = $modx->newQuery('faqManItem');
 
     // Hide unpublished items
-    if ($hideUnpublished) {
-        $ci->where(array('published' => 1));
+    if (!$showUnpublished) {
+        $ci->where(array('published' => true));
     }
 
     $ci->sortby($sortBy, $sortDir);
     foreach ($set->getMany('Item', $ci) as $item) {
         $itemArray = $item->toArray();
-        if ($itemArray['type'] == faqMan::FAQ_TYPE_C) {
-            $setList[] = $faqMan->getChunk($categoryTpl, $itemArray);
-        } else {
-            $setList[] = $faqMan->getChunk($tpl, $itemArray);
-        }
+        $setList[] = $faqMan->getChunk($tpl, $itemArray);
     }
 
     // Collect output from this FAQ set.

@@ -34,11 +34,17 @@ $item = $modx->newObject('faqManItem');
 $item->fromArray($_POST);
 
 // New faqManItems are added at the end of the list
-$total = $modx->getCount('faqManItem',array('set' => $_POST['set']));
+$total = $modx->getCount('faqManItem', array('set' => $_POST['set']));
 $item->set('rank',$total);
+
+// Check if set is currently mark as unpublished
+$set = $modx->getObject('faqManSet', $_POST['set']);
+if ($set->get('published') == false) {
+    $item->published = false;
+}
 
 // Try to save and return our status
 if ($item->save() == false) {
     return $modx->error->failure($modx->lexicon('faqman.item_err_save'));
 }
-return $modx->error->success('',$item);
+return $modx->error->success('', $item);
