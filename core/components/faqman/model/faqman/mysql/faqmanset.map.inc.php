@@ -4,14 +4,15 @@
  */
 $xpdo_meta_map['faqManSet']= array (
   'package' => 'faqman',
-  'version' => NULL,
+  'version' => '1.1',
   'table' => 'faqman_set',
   'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'name' => '',
     'description' => '',
-    'rank' => '',
+    'rank' => 0,
+    'published' => NULL,
   ),
   'fieldMeta' => 
   array (
@@ -30,7 +31,7 @@ $xpdo_meta_map['faqManSet']= array (
       'null' => false,
       'default' => '',
     ),
-    'rank' =>
+    'rank' => 
     array (
       'dbtype' => 'integer',
       'precision' => '5',
@@ -38,6 +39,15 @@ $xpdo_meta_map['faqManSet']= array (
       'phptype' => 'integer',
       'null' => false,
       'default' => 0,
+    ),
+    'published' => 
+    array (
+      'dbtype' => 'integer',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'defaut' => '0',
     ),
   ),
   'composites' => 

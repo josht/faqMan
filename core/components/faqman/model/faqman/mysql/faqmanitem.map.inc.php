@@ -4,7 +4,7 @@
  */
 $xpdo_meta_map['faqManItem']= array (
   'package' => 'faqman',
-  'version' => NULL,
+  'version' => '1.1',
   'table' => 'faqman_items',
   'extends' => 'xPDOSimpleObject',
   'fields' => 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model package="faqman" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="faqman">
+<model package="faqman" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="faqman" version="1.1">
 
     <!-- FAQ's are grouped into 'sets', when categories are implemented they will be used to group items within sets -->
     <object class="faqManSet" table="faqman_set" extends="xPDOSimpleObject">
