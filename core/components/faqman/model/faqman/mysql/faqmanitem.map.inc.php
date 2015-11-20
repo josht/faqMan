@@ -12,8 +12,8 @@ $xpdo_meta_map['faqManItem']= array (
     'question' => '',
     'answer' => '',
     'rank' => 0,
-    'type' => NULL,
-    'published' => NULL,
+    'type' => 0,
+    'published' => 1,
     'set' => 0,
   ),
   'fieldMeta' => 
@@ -48,7 +48,7 @@ $xpdo_meta_map['faqManItem']= array (
       'attributes' => 'unsigned',
       'phptype' => 'integer',
       'null' => false,
-      'defaut' => '0',
+      'default' => 0,
     ),
     'published' => 
     array (
@@ -57,7 +57,7 @@ $xpdo_meta_map['faqManItem']= array (
       'attributes' => 'unsigned',
       'phptype' => 'integer',
       'null' => false,
-      'defaut' => '0',
+      'default' => 1,
     ),
     'set' => 
     array (
