@@ -19,3 +19,6 @@
 	padding: 1px 0 30px 0;
 }
 
+.faqman-grid-set-unpublished {
+    opacity: .25;
+}

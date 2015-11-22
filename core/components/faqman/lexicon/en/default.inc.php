@@ -28,6 +28,8 @@
 $_lang['faqman'] = 'FAQ Manager';
 $_lang['faqman.menu_desc'] = 'Simple FAQ management';
 $_lang['faqman.back_to_sets'] = 'Back to Sets';
+$_lang['faqman.publish'] = 'Publish';
+$_lang['faqman.unpublish'] = 'Unpublish';
 
 $_lang['faqman.set_intro_msg'] = 'Manage FAQ sets.';
 $_lang['faqman.sets'] = 'Sets';

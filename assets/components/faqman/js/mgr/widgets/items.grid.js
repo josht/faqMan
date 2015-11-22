@@ -30,6 +30,7 @@ faqMan.grid.Items = function(config) {
             ,enableRowBody:true
             ,showPreview:true
             ,getRowClass: this.applyRowClass
+            ,scrollOffset: 0
         }
         ,sortInfo: {
             field: 'rank'
@@ -68,36 +69,42 @@ faqMan.grid.Items = function(config) {
                 }
             }
         }
-        ,tbar: [{
-            text: _('faqman.item_create')
-            ,handler: this.createItem
-            ,scope: this
-        },'->',{
-            xtype: 'textfield'
-            ,name: 'search'
-            ,id: 'faqman-tf-search'
-            ,emptyText: _('search')+'...'
-            ,listeners: {
-                'change': {fn: this.search, scope: this}
-                ,'render': {fn: function(cmp) {
-                    new Ext.KeyMap(cmp.getEl(), {
-                        key: Ext.EventObject.ENTER
-                        ,fn: function() {
-                            this.fireEvent('change',this.getValue());
-                            this.blur();
-                            return true;}
-                        ,scope: cmp
-                    });
-                },scope:this}
+        ,tbar: [
+            {
+                text: _('faqman.item_create')
+                ,handler: this.createItem
+                ,scope: this
             }
-        },'-',{
-            xtype: 'button'
-            ,id: 'modx-filter-clear'
-            ,text: _('filter_clear')
-            ,listeners: {
-                'click': {fn: this.clearFilter, scope: this}
+            ,'->'
+            ,{
+                xtype: 'textfield'
+                ,name: 'search'
+                ,id: 'faqman-tf-search'
+                ,emptyText: _('search')+'...'
+                ,listeners: {
+                    'change': {fn: this.search, scope: this}
+                    ,'render': {fn: function(cmp) {
+                        new Ext.KeyMap(cmp.getEl(), {
+                            key: Ext.EventObject.ENTER
+                            ,fn: function() {
+                                this.fireEvent('change',this.getValue());
+                                this.blur();
+                                return true;}
+                            ,scope: cmp
+                        });
+                    },scope:this}
+                }
             }
-        }]
+            ,'-'
+            ,{
+                xtype: 'button'
+                ,id: 'modx-filter-clear'
+                ,text: _('filter_clear')
+                ,listeners: {
+                    'click': {fn: this.clearFilter, scope: this}
+                }
+            }
+        ]
     });
     faqMan.grid.Items.superclass.constructor.call(this,config);
     this._makeTemplate();

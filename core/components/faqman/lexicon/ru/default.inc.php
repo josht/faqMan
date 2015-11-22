@@ -28,6 +28,8 @@
 $_lang['faqman'] = 'Менеджер FAQ';
 $_lang['faqman.menu_desc'] = 'Простое управление FAQ';
 $_lang['faqman.back_to_sets'] = 'Назад к группам';
+$_lang['faqman.publish'] = 'Publish';
+$_lang['faqman.unpublish'] = 'Unpublish';
 
 $_lang['faqman.set_intro_msg'] = 'Управление группами FAQ.';
 $_lang['faqman.sets'] = 'Группы';

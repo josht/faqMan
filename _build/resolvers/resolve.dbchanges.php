@@ -43,6 +43,7 @@ if ($object->xpdo) {
             /** 1.2 */
             $manager->addField('faqManItem', 'published');
             $manager->addField('faqManSet', 'published');
+            $manager->addField('faqManSet', 'rank');
 
             /** 1.0.3 */
             $manager->alterField('faqManItem', 'question');

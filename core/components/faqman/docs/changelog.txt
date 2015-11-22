@@ -1,5 +1,8 @@
 Changelog for faqMan.
 
+1.2.0 pl
+=====================
+
 1.1.1 pl
 =====================
 - Enter shouldn't cause FAQ form to submit
