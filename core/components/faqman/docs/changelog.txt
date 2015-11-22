@@ -2,6 +2,7 @@ Changelog for faqMan.
 
 1.2.0 pl
 =====================
+- FAQ sets and questions and now be marked as published/unpublished
 
 1.1.1 pl
 =====================
