@@ -19,6 +19,7 @@ $setTpl             = $modx->getOption('setTpl', $scriptProperties, null);
 $sortBy             = $modx->getOption('sortBy', $scriptProperties, 'rank');
 $sortDir            = $modx->getOption('sortDir', $scriptProperties, 'ASC');
 $limit              = $modx->getOption('limit', $scriptProperties, null);
+$limitQuestions     = $modx->getOption('limitQuestions', $scriptProperties, null);
 $showUnpublished    = $modx->getOption('showUnpublished', $scriptProperties, false);
 $showMenu           = $modx->getOption('showMenu', $scriptProperties, false);
 $outputSeparator    = $modx->getOption('outputSeparator', $scriptProperties, "\n");
@@ -70,6 +71,8 @@ foreach ($sets as $set) {
     }
 
     $ci->sortby($sortBy, $sortDir);
+    if (!empty($limitQuestions)) $ci->limit($limitQuestions);
+
     foreach ($set->getMany('Item', $ci) as $item) {
         $itemArray = $item->toArray();
         $setList[] = $faqMan->getChunk($tpl, $itemArray);
