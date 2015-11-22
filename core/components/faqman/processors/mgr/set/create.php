@@ -29,7 +29,7 @@ $alreadyExists = $modx->getObject('faqManSet',array(
     'name' => $_POST['name'],
 ));
 if ($alreadyExists) {
-    $modx->error->addField('name',$modx->lexicon('faqman.item_err_ae'));
+    $modx->error->addField('name', $modx->lexicon('faqman.item_err_ae'));
 }
 
 if ($modx->error->hasError()) {
@@ -43,4 +43,4 @@ if ($set->save() == false) {
     return $modx->error->failure($modx->lexicon('faqman.set_err_save'));
 }
 
-return $modx->error->success('',$set);
+return $modx->error->success('', $set);

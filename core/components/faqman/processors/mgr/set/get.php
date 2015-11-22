@@ -25,11 +25,13 @@
  * @package faqman
  * @subpackage processors
  */
-/* get board */
+/* Get set */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.set_err_ns'));
-$set = $modx->getObject('faqManSet',$scriptProperties['id']);
+
+$set = $modx->getObject('faqManSet', $scriptProperties['id']);
+
 if (!$set) return $modx->error->failure($modx->lexicon('faqman.set_err_nf'));
 
 /* output */
-$setArray = $set->toArray('',true);
-return $modx->error->success('',$setArray);
+$setArray = $set->toArray('', true);
+return $modx->error->success('', $setArray);

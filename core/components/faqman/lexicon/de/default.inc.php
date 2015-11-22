@@ -29,6 +29,8 @@
 $_lang['faqman'] = 'FAQ Manager';
 $_lang['faqman.menu_desc'] = 'FAQ Listen einfach verwalten';
 $_lang['faqman.back_to_sets'] = 'zurück zu Listen';
+$_lang['faqman.publish'] = 'Publish';
+$_lang['faqman.unpublish'] = 'Unpublish';
 
 $_lang['faqman.set_intro_msg'] = 'FAQ-Listen verwalten.';
 $_lang['faqman.sets'] = 'Listen';

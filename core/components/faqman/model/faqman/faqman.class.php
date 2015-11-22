@@ -61,8 +61,9 @@ class faqMan {
      *
      * @access public
      * @param string $ctx The context to load. Defaults to web.
+     * @return string
      */
-    public function initialize($ctx = 'web') {
+	public function initialize($ctx = 'web') {
         switch ($ctx) {
             case 'mgr':
                 if (!$this->modx->loadClass('faqman.request.faqManControllerRequest',$this->config['modelPath'],true,true)) {

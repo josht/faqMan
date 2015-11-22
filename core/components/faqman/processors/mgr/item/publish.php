@@ -20,19 +20,23 @@
  * @package faqman
  */
 /**
- * Remove an FAQ set.
+ * Publish an Item
  *
  * @package faqman
  * @subpackage processors
  */
-/* get board */
-if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.set_err_ns'));
-$set = $modx->getObject('faqManSet', $scriptProperties['id']);
-if (!$set) return $modx->error->failure($modx->lexicon('faqman.set_err_nf'));
+/* get item */
+if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.item_err_ns'));
+$item = $modx->getObject('faqManItem', $scriptProperties['id']);
+if (!$item) return $modx->error->failure($modx->lexicon('faqman.item_err_nf'));
 
-if ($set->remove() == false) {
-    return $modx->error->falure($modx->lexicon('faqman.set_err_remove'));
+// Mark as published
+$item->set('published', 1);
+
+if ($item->save() == false) {
+    return $modx->error->failure($modx->lexicon('faqman.item_err_save'));
 }
 
 /* output */
-return $modx->error->success('', $set);
+$itemArray = $item->toArray('', true);
+return $modx->error->success('', $itemArray);

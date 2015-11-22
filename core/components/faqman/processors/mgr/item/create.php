@@ -21,30 +21,30 @@
  */
 /**
  * Create an Item
- * 
+ *
  * @package faqman
  * @subpackage processors
  */
-if (empty($scriptProperties['set'])) return $modx->error->failure($modx->lexicon('faqman.set_err_ns'));
-$alreadyExists = $modx->getObject('faqManItem',array(
-    'name' => $_POST['name'],
-));
-if ($alreadyExists) {
-    $modx->error->addField('name',$modx->lexicon('faqman.item_err_ae'));
-}
 
-if ($modx->error->hasError()) {
-    return $modx->error->failure();
-}
+// Make sure we are submitting something to create
+if (empty($_POST['set'])) return $modx->error->failure($modx->lexicon('faqman.set_err_ns'));
 
+// Create a new faqManItem object and fill it with information
 $item = $modx->newObject('faqManItem');
 $item->fromArray($_POST);
 
-$total = $modx->getCount('faqManItem',array('set' => $_POST['set']));
+// New faqManItems are added at the end of the list
+$total = $modx->getCount('faqManItem', array('set' => $_POST['set']));
 $item->set('rank',$total);
 
+// Check if set is currently mark as unpublished
+$set = $modx->getObject('faqManSet', $_POST['set']);
+if ($set->get('published') == false) {
+    $item->published = false;
+}
+
+// Try to save and return our status
 if ($item->save() == false) {
     return $modx->error->failure($modx->lexicon('faqman.item_err_save'));
 }
-
-return $modx->error->success('',$item);
+return $modx->error->success('', $item);

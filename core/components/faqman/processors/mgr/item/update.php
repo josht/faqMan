@@ -21,13 +21,13 @@
  */
 /**
  * Update an Item
- * 
+ *
  * @package faqman
  * @subpackage processors
  */
 /* get board */
 if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.item_err_ns'));
-$item = $modx->getObject('faqManItem',$scriptProperties['id']);
+$item = $modx->getObject('faqManItem', $scriptProperties['id']);
 if (!$item) return $modx->error->failure($modx->lexicon('faqman.item_err_nf'));
 
 $item->fromArray($scriptProperties);
@@ -37,5 +37,5 @@ if ($item->save() == false) {
 }
 
 /* output */
-$itemArray = $item->toArray('',true);
-return $modx->error->success('',$itemArray);
+$itemArray = $item->toArray('', true);
+return $modx->error->success('', $itemArray);

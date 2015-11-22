@@ -20,7 +20,7 @@
  * @package faqman
  */
 /**
- * Resolve creating db tables
+ * Resolve changes made to DB tables
  *
  * @package faqman
  * @subpackage build
@@ -28,6 +28,7 @@
 if ($object->xpdo) {
     switch ($options[xPDOTransport::PACKAGE_ACTION]) {
         case xPDOTransport::ACTION_INSTALL:
+        case xPDOTransport::ACTION_UPGRADE:
             /** @var modX $modx */
             $modx      =& $object->xpdo;
             $modelPath = $modx->getOption('faqman.core_path',null,$modx->getOption('core_path').'components/faqman/').'model/';
@@ -36,11 +37,19 @@ if ($object->xpdo) {
             /** @var xPDOManager $manager */
             $manager = $modx->getManager();
 
-            $manager->createObjectContainer('faqManItem');
-            $manager->createObjectContainer('faqManSet');
+            $oldLogLevel = $modx->getLogLevel();
+            $modx->setLogLevel(0);
 
-            break;
-        case xPDOTransport::ACTION_UPGRADE:
+            /** 1.2 */
+            $manager->addField('faqManItem', 'published');
+            $manager->addField('faqManSet', 'published');
+            $manager->addField('faqManSet', 'rank');
+
+            /** 1.0.3 */
+            $manager->alterField('faqManItem', 'question');
+
+
+            $modx->setLogLevel($oldLogLevel);
             break;
     }
 }

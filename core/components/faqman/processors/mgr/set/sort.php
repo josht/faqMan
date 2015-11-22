@@ -26,36 +26,33 @@
  * @package faqman
  * @subpackage processors
  */
-$source = $modx->getObject('faqManItem', array(
-    'set' => $_POST['set'],
-    'id'  => $_POST['source'],
+$source = $modx->getObject('faqManSet', array(
+    'id' => $_POST['source'],
 ));
 if (empty($source)) return $modx->error->failure();
 
-$target = $modx->getObject('faqManItem', array(
-    'set' => $_POST['set'],
-    'id'  => $_POST['target'],
+$target = $modx->getObject('faqManSet', array(
+    'id' => $_POST['target'],
 ));
+
 if (empty($target)) return $modx->error->failure();
 
 if ($source->get('rank') < $target->get('rank')) {
     $modx->exec("
-        UPDATE {$modx->getTableName('faqManItem')}
+        UPDATE {$modx->getTableName('faqManSet')}
           SET rank = rank - 1
         WHERE
-          `set` = ".$_POST['set']."
-        AND rank <= {$target->get('rank')}
+          rank <= {$target->get('rank')}
         AND rank > {$source->get('rank')}
         AND rank > 0
     ");
     $newRank = $target->get('rank');
 } else {
     $modx->exec("
-        UPDATE {$modx->getTableName('faqManItem')}
+        UPDATE {$modx->getTableName('faqManSet')}
           SET rank = rank + 1
         WHERE
-          `set` = ".$_POST['set']."
-        AND rank >= {$target->get('rank')}
+          rank >= {$target->get('rank')}
         AND rank < {$source->get('rank')}
     ");
     $newRank = $target->get('rank');

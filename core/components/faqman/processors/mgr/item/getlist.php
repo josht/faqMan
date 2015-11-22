@@ -26,24 +26,60 @@
  * @subpackage processors
  */
 if (empty($scriptProperties['set'])) return $modx->error->failure($modx->lexicon('faqman.set_err_ns'));
-
+// Get query options and set any defaults needed
 $isLimit = !empty($_REQUEST['limit']);
-$start = $modx->getOption('start',$_REQUEST,0);
-$limit = $modx->getOption('limit',$_REQUEST,20);
-$sort = $modx->getOption('sort',$_REQUEST,'rank');
-$dir = $modx->getOption('dir',$_REQUEST,'ASC');
+$start   = $modx->getOption('start', $_REQUEST,0);
+$limit   = $modx->getOption('limit', $_REQUEST,20);
+$sort    = $modx->getOption('sort', $_REQUEST,'rank');
+$dir     = $modx->getOption('dir', $_REQUEST,'ASC');
+$search  = explode(' ', $modx->getOption('search', $_REQUEST, '')); // Get each word in search
 
+// Init search query
 $c = $modx->newQuery('faqManItem');
 $c->where(array('set' => $scriptProperties['set']));
-$count = $modx->getCount('faqManItem',$c);
 
-$c->sortby($sort,$dir);
-if ($isLimit) $c->limit($limit,$start);
-$items = $modx->getCollection('faqManItem',$c);
+// Add search terms to query
+foreach ($search as $term) {
+  if (!empty($term)) {
+    $c->where(array(
+      array(
+        'question:LIKE' => '%' . $term . '%')
+      ),
+      array(
+        'OR:answer:LIKE' => '%' . $term . '%'
+      )
+    );
+  }
+}
 
+// Get total count of items returned
+$count = $modx->getCount('faqManItem', $c);
+
+// Set query sort and limits and get items
+$c->sortby($sort, $dir);
+if ($isLimit) $c->limit($limit, $start);
+$items = $modx->getCollection('faqManItem', $c);
+
+// Get all returned items as array and return
 $list = array();
 foreach ($items as $item) {
-    $itemArray = $item->toArray();
-    $list[]= $itemArray;
+  $itemArray = $item->toArray();
+  $list[]= array_merge(
+      $itemArray,
+      array('actions' => array(
+          array(
+              'className' => 'edit',
+              'text'      => 'Edit'
+          ),
+          array(
+              'className' => 'delete',
+              'text'      => 'Delete'
+          ),
+          array(
+              'className' => ($itemArray['published']) ? 'unpublish' : 'publish orange',
+              'text'      => ($itemArray['published']) ? 'Unpublish' : 'Publish'
+          )
+      ))
+  );
 }
-return $this->outputArray($list,$count);
+return $this->outputArray($list, $count);

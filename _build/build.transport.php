@@ -22,7 +22,7 @@
 /**
  * faqMan build script
  *
- * @package faqman 
+ * @package faqman
  * @subpackage build
  */
 $mtime  = microtime();
@@ -34,7 +34,7 @@ set_time_limit(0);
 // Define package
 define('PKG_NAME','faqMan');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','1.1.1');
+define('PKG_VERSION','1.2.0');
 define('PKG_RELEASE','pl');
 
 // Define sources
@@ -177,6 +177,9 @@ if (empty($menu)) {
     $modx->log(modX::LOG_LEVEL_INFO, 'Adding in PHP resolvers...');
     $vehicle->resolve('php', array(
         'source' => $sources['resolvers'] . 'resolve.tables.php',
+    ));
+    $vehicle->resolve('php', array(
+            'source' => $sources['resolvers'] . 'resolve.dbchanges.php',
     ));
     $vehicle->resolve('php', array(
         'source' => $sources['resolvers'] . 'resolve.settings.php',

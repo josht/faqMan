@@ -4,13 +4,16 @@
  */
 $xpdo_meta_map['faqManItem']= array (
   'package' => 'faqman',
+  'version' => '1.1',
   'table' => 'faqman_items',
+  'extends' => 'xPDOSimpleObject',
   'fields' => 
   array (
     'question' => '',
     'answer' => '',
     'rank' => 0,
-    'type' => NULL,
+    'type' => 0,
+    'published' => 1,
     'set' => 0,
   ),
   'fieldMeta' => 
@@ -45,7 +48,16 @@ $xpdo_meta_map['faqManItem']= array (
       'attributes' => 'unsigned',
       'phptype' => 'integer',
       'null' => false,
-      'defaut' => '0',
+      'default' => 0,
+    ),
+    'published' => 
+    array (
+      'dbtype' => 'integer',
+      'precision' => '1',
+      'attributes' => 'unsigned',
+      'phptype' => 'integer',
+      'null' => false,
+      'default' => 1,
     ),
     'set' => 
     array (
