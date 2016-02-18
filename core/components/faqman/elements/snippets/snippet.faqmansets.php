@@ -29,11 +29,11 @@ if (!empty($set)) {
     $c->where(array(
         $field => $set,
     ));
+}
 
-    // Hide unpublished sets
-    if (!$showUnpublished) {
-        $c->where(array('published' => true));
-    }
+// Hide unpublished sets
+if (!$showUnpublished) {
+    $c->where(array('published' => true));
 }
 
 $c->sortby($sortBy,$sortDir);
