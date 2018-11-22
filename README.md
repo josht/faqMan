@@ -1,4 +1,4 @@
-##FAQ Manager
+## FAQ Manager
 FAQ Manager is an Extra for MODx Revolution that helps you manage your FAQs from within the Revo backend.
 
 You can organize your Answers and Questions in sets and output them using a simple snippet call adding your own custom templates, CSS & JS.
@@ -26,13 +26,14 @@ The templates are divided into two parts, the set heading (setTpl) and the quest
 To add headings to each set of FAQs, you will want to define this template. The template variables available in this template are:
 
 - [[+id]]
+- [[+count]]
 - [[+name]]
 - [[+description]]
 
 The default template for this looks like this.
 
     <h2>
-        [[+name]]
+        [[+name]] ([[+count]])
         <div>[[+description]]</div>
     </h2>
 
@@ -51,7 +52,7 @@ The default template for this section looks like this
     <span class="faqman-answer">[[+answer]]</span>
 
 
-##FAQ Snippet call
+## FAQ Snippet call
 
 To output your FAQs, just place following snippet call in desired location:
 
@@ -65,7 +66,7 @@ Calling it like this will output all FAQ sets and their questions. A more specif
       &setTpl=`setTpl`
     ]]
 
-##Options
+## Options
 
 There are more options available to modify the call to your needs:
 

@@ -57,11 +57,6 @@ foreach ($sets as $set) {
     $setList  = array();
     $setArray = $set->toArray();
 
-    // If no set template is defined, don't output set data
-    if (!empty($setTpl)) {
-        $setHeading = $faqMan->getChunk($setTpl, $setArray);
-    }
-
     // Loop through items and set output to array
     $ci = $modx->newQuery('faqManItem');
 
@@ -76,6 +71,12 @@ foreach ($sets as $set) {
     foreach ($set->getMany('Item', $ci) as $item) {
         $itemArray = $item->toArray();
         $setList[] = $faqMan->getChunk($tpl, $itemArray);
+    }
+
+    // If no set template is defined, don't output set data
+    if (!empty($setTpl)) {
+        $setArray = array_merge($setArray, ['count' => count($setList)]);
+        $setHeading = $faqMan->getChunk($setTpl, $setArray);
     }
 
     // Collect output from this FAQ set.

@@ -7,7 +7,7 @@ $xpdo_meta_map['faqManItem']= array (
   'version' => '1.1',
   'table' => 'faqman_items',
   'extends' => 'xPDOSimpleObject',
-  'fields' => 
+  'fields' =>
   array (
     'question' => '',
     'answer' => '',
@@ -16,23 +16,23 @@ $xpdo_meta_map['faqManItem']= array (
     'published' => 1,
     'set' => 0,
   ),
-  'fieldMeta' => 
+  'fieldMeta' =>
   array (
-    'question' => 
+    'question' =>
     array (
       'dbtype' => 'text',
-      'phptype' => 'text',
+      'phptype' => 'string',
       'null' => false,
       'default' => '',
     ),
-    'answer' => 
+    'answer' =>
     array (
       'dbtype' => 'text',
-      'phptype' => 'text',
+      'phptype' => 'string',
       'null' => false,
       'default' => '',
     ),
-    'rank' => 
+    'rank' =>
     array (
       'dbtype' => 'integer',
       'precision' => '5',
@@ -41,7 +41,7 @@ $xpdo_meta_map['faqManItem']= array (
       'null' => false,
       'default' => 0,
     ),
-    'type' => 
+    'type' =>
     array (
       'dbtype' => 'integer',
       'precision' => '1',
@@ -50,7 +50,7 @@ $xpdo_meta_map['faqManItem']= array (
       'null' => false,
       'default' => 0,
     ),
-    'published' => 
+    'published' =>
     array (
       'dbtype' => 'integer',
       'precision' => '1',
@@ -59,7 +59,7 @@ $xpdo_meta_map['faqManItem']= array (
       'null' => false,
       'default' => 1,
     ),
-    'set' => 
+    'set' =>
     array (
       'dbtype' => 'integer',
       'precision' => '10',
@@ -70,9 +70,9 @@ $xpdo_meta_map['faqManItem']= array (
       'index' => 'index',
     ),
   ),
-  'aggregates' => 
+  'aggregates' =>
   array (
-    'Set' => 
+    'Set' =>
     array (
       'class' => 'faqManSet',
       'local' => 'set',

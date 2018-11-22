@@ -1,4 +1,4 @@
 <h2>
-    [[+name]]
+    [[+name]] ([[+count]])
     <div>[[+description]]</div>
 </h2>

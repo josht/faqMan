@@ -4,7 +4,7 @@
     <!-- FAQ's are grouped into 'sets', when categories are implemented they will be used to group items within sets -->
     <object class="faqManSet" table="faqman_set" extends="xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
-        <field key="description" dbtype="text" phptype="text" null="false" default="" />
+        <field key="description" dbtype="text" phptype="string" null="false" default="" />
         <field key="rank" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="published" dbtype="integer" precision="1" attributes="unsigned" phptype="integer" null="false" default="1" />
 
@@ -12,8 +12,8 @@
     </object>
 
     <object class="faqManItem" table="faqman_items" extends="xPDOSimpleObject">
-        <field key="question" dbtype="text" phptype="text" null="false" default="" />
-        <field key="answer" dbtype="text" phptype="text" null="false" default="" />
+        <field key="question" dbtype="text" phptype="string" null="false" default="" />
+        <field key="answer" dbtype="text" phptype="string" null="false" default="" />
         <field key="rank" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="type" dbtype="integer" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="published" dbtype="integer" precision="1" attributes="unsigned" phptype="integer" null="false" default="1" />
