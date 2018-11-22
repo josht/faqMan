@@ -1,5 +1,23 @@
 Changelog for faqMan.
 
+1.3.0 pl
+=====================
+- Add count as placeholder in FAQ Set template
+
+- Update phptype in scheme to fix problem when using PHP > 7.2
+
+1.2.1 pl
+=====================
+- Fixes a bug that would allow questions marked unpublished still be displayed.
+
+- Allow Sets and FAQ's to be marked as published/unpublished
+
+- New lexicon entries
+
+- Allow output of multiple FAQ sets with a single call
+
+- Allow limiting number of FAQ's that are returned
+
 1.2.0 pl
 =====================
 - FAQ sets and questions and now be marked as published/unpublished
