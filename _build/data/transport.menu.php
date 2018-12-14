@@ -16,8 +16,6 @@
  * You should have received a copy of the GNU General Public License along with
  * faqMan; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package faqman
  */
 /**
  * Adds modActions and modMenus into package
@@ -31,7 +29,7 @@ $action->fromArray(array(
     'namespace'   => 'faqman',
     'parent'      => 0,
     'controller'  => 'index',
-    'haslayout'   => 1,
+    'haslayout'   => true,
     'lang_topics' => 'faqman:default',
     'assets'      => '',
 ), '', true, true);

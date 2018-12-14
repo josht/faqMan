@@ -3,10 +3,10 @@ Changelog for faqMan.
 2.0.0
 =====================
 - Update to use class based processors
-- Edit FAQ Set names an descriptions in-line on the grid
+- Edit FAQ Sets in-line on the grid
 
 Bug Fixes
-- FAQ Set's can now be sorted
+- FAQ Set's can now be sorted in the manager
 
 1.3.0 pl
 =====================
