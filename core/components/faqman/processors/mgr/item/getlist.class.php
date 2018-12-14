@@ -32,7 +32,10 @@ class FaqmanItemGetListProcessor extends modObjectGetListProcessor {
     public $objectType = 'faqman.faqman';
 
     public function prepareQueryBeforeCount(xPDOQuery $c) {
+        $set   = $this->getProperty('set');
         $query = $this->getProperty('query');
+
+        $c->where(['set' => $set]);
         if (!empty($query)) {
             $c->where([
                 'question:LIKE' => '%'.$query.'%',
