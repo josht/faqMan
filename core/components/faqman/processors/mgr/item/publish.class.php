@@ -20,9 +20,21 @@
  * @package faqman
  */
 /**
+ * Publish an Item
+ *
  * @package faqman
- * @subpackage controllers
+ * @subpackage processors
  */
-require_once dirname(dirname(__FILE__)).'/model/faqman/faqman.class.php';
-$faqMan = new faqMan($modx);
-return $faqMan->initialize('mgr');
+class FaqmanItemPublishProcessor extends modObjectUpdateProcessor {
+    public $classKey = 'faqManItem';
+    public $languageTopic = array('faqman:default');
+    public $objectType = 'faqman.faqman';
+
+    public function beforeSave() {
+        $this->object->set('published', 1);
+
+        return true;
+    }
+}
+
+return 'FaqmanItemPublishProcessor';

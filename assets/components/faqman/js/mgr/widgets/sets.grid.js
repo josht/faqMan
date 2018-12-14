@@ -1,5 +1,5 @@
 
-faqMan.grid.Sets = function(config) {
+Faqman.grid.Sets = function(config) {
     config = config || {};
     var gridView = new Ext.grid.GridView({
         forceFit: true
@@ -9,7 +9,7 @@ faqMan.grid.Sets = function(config) {
             var data = row.data;
 
             if (data.published == 0) {
-                cls = 'faqman-grid-set-unpublished'; // highlight row red
+                cls = 'faqman-grid-set-unpublished'; // Faded color
             }
 
             return cls;
@@ -18,16 +18,18 @@ faqMan.grid.Sets = function(config) {
 
     Ext.applyIf(config,{
         id: 'faqman-grid-sets'
-        ,url: faqMan.config.connector_url
-        ,baseParams: {
-            action: 'mgr/set/getlist'
-        }
+        ,url: Faqman.config.connectorUrl
+        ,baseParams: { action: 'mgr/set/getList' }
         ,fields: ['id','name','description','rank', 'published']
         ,autoHeight: true
         ,paging: true
         ,ddGroup: 'mygridDD'
         ,enableDragDrop: true
         ,remoteSort: true
+        ,anchor: '97%'
+        ,autoExpandColumn: 'name'
+        ,save_action: 'mgr/set/updateFromGrid'
+        ,autosave: true
         ,view: gridView
         ,columns: [
             {
@@ -38,12 +40,14 @@ faqMan.grid.Sets = function(config) {
             ,{
                 header: _('name')
                 ,dataIndex: 'name'
-                ,width: 200
+                ,width: 100
+                ,editor: { xtype: 'textfield' }
             }
             ,{
                 header: _('description')
                 ,dataIndex: 'description'
-                ,width: 250
+                ,width: 300
+                ,editor: { xtype: 'textfield' }
             }
         ]
         ,listeners: {
@@ -80,11 +84,11 @@ faqMan.grid.Sets = function(config) {
             ,scope: this
         }]
     });
-    faqMan.grid.Sets.superclass.constructor.call(this,config);
+    Faqman.grid.Sets.superclass.constructor.call(this,config);
     this.addEvents('sort');
     this.on('sort',this.onSort,this);
 };
-Ext.extend(faqMan.grid.Sets,MODx.grid.Grid,{
+Ext.extend(Faqman.grid.Sets,MODx.grid.Grid,{
     windows: {}
 
     ,onSort: function(o) {
@@ -136,7 +140,7 @@ Ext.extend(faqMan.grid.Sets,MODx.grid.Grid,{
     }
 
     ,manageSet: function() {
-        var redir = '?a='+MODx.request.a+'&action=set&setid=';
+        var redir = '?a=set&namespace='+MODx.request.namespace+'&setid=';
 
         // needed for double click
         if (typeof(this.menu.record) == "undefined") {
@@ -148,6 +152,7 @@ Ext.extend(faqMan.grid.Sets,MODx.grid.Grid,{
     }
 
     ,createSet: function(btn,e) {
+        e.preventDefault();
         if (!this.windows.createSet) {
             this.windows.createSet = MODx.load({
                 xtype: 'faqman-window-set-create'
@@ -161,6 +166,7 @@ Ext.extend(faqMan.grid.Sets,MODx.grid.Grid,{
     }
 
     ,updateSet: function(btn,e) {
+        e.preventDefault();
         if (!this.menu.record || !this.menu.record.id) return false;
         var r = this.menu.record;
 
@@ -229,10 +235,10 @@ Ext.extend(faqMan.grid.Sets,MODx.grid.Grid,{
         });
     }
 });
-Ext.reg('faqman-grid-sets',faqMan.grid.Sets);
+Ext.reg('faqman-grid-sets',Faqman.grid.Sets);
 
 
-faqMan.window.CreateSet = function(config) {
+Faqman.window.CreateSet = function(config) {
     config = config || {};
     this.ident = config.ident || 'mecset'+Ext.id();
     Ext.applyIf(config,{
@@ -241,28 +247,26 @@ faqMan.window.CreateSet = function(config) {
         ,autoHeight: true
         ,width: 475
         ,modal: true
-        ,url: faqMan.config.connector_url
+        ,url: Faqman.config.connectorUrl
         ,action: 'mgr/set/create'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'name'
-            ,id: 'faqman-'+this.ident+'-name'
-            ,width: 300
+            ,anchor: '100%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
-            ,id: 'faqman-'+this.ident+'-description'
-            ,width: 300
+            ,anchor: '100%'
         }]
     });
-    faqMan.window.CreateSet.superclass.constructor.call(this,config);
+    Faqman.window.CreateSet.superclass.constructor.call(this,config);
 };
-Ext.extend(faqMan.window.CreateSet,MODx.Window);
-Ext.reg('faqman-window-set-create',faqMan.window.CreateSet);
+Ext.extend(Faqman.window.CreateSet,MODx.Window);
+Ext.reg('faqman-window-set-create',Faqman.window.CreateSet);
 
-faqMan.window.UpdateSet = function(config) {
+Faqman.window.UpdateSet = function(config) {
     config = config || {};
     this.ident = config.ident || 'meuset'+Ext.id();
     Ext.applyIf(config,{
@@ -271,28 +275,25 @@ faqMan.window.UpdateSet = function(config) {
         ,autoHeight: true
         ,width: 475
         ,modal: true
-        ,url: faqMan.config.connector_url
+        ,url: Faqman.config.connectorUrl
         ,action: 'mgr/set/update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'
-            ,id: 'faqman-'+this.ident+'-id'
         },{
             xtype: 'textfield'
             ,fieldLabel: _('name')
             ,name: 'name'
-            ,id: 'faqman-'+this.ident+'-name'
-            ,width: 300
+            ,anchor: '100%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('description')
             ,name: 'description'
-            ,id: 'faqman-'+this.ident+'-description'
-            ,width: 300
+            ,anchor: '100%'
         }]
     });
-    faqMan.window.UpdateSet.superclass.constructor.call(this,config);
+    Faqman.window.UpdateSet.superclass.constructor.call(this,config);
 };
-Ext.extend(faqMan.window.UpdateSet,MODx.Window);
-Ext.reg('faqman-window-set-update',faqMan.window.UpdateSet);
+Ext.extend(Faqman.window.UpdateSet,MODx.Window);
+Ext.reg('faqman-window-set-update',Faqman.window.UpdateSet);
 

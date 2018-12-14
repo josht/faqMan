@@ -1,5 +1,13 @@
 Changelog for faqMan.
 
+2.0.0
+=====================
+- Update to use class based processors
+- Edit FAQ Set names an descriptions in-line on the grid
+
+Bug Fixes
+- FAQ Set's can now be sorted
+
 1.3.0 pl
 =====================
 - Add count as placeholder in FAQ Set template

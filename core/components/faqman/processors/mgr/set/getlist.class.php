@@ -20,19 +20,17 @@
  * @package faqman
  */
 /**
- * Remove an FAQ set.
+ * Get a list of FAQ sets
  *
  * @package faqman
  * @subpackage processors
  */
-/* get board */
-if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.set_err_ns'));
-$set = $modx->getObject('faqManSet', $scriptProperties['id']);
-if (!$set) return $modx->error->failure($modx->lexicon('faqman.set_err_nf'));
-
-if ($set->remove() == false) {
-    return $modx->error->falure($modx->lexicon('faqman.set_err_remove'));
+class faqManSetGetListProcessor extends modObjectGetListProcessor {
+    public $classKey = 'faqManSet';
+    public $languageTopic = array('faqman:default');
+    public $defaultSortField = 'rank';
+    public $defaultSortDirection = 'ASC';
+    public $objectType = 'faqman.faqman';
 }
 
-/* output */
-return $modx->error->success('', $set);
+return 'faqManSetGetListProcessor';

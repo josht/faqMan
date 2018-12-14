@@ -1,14 +1,14 @@
-var faqMan = function(config) {
+var Faqman = function(config) {
     config = config || {};
-    faqMan.superclass.constructor.call(this,config);
+    Faqman.superclass.constructor.call(this,config);
 };
-Ext.extend(faqMan,Ext.Component,{
+Ext.extend(Faqman,Ext.Component,{
     page:{},window:{},grid:{},tree:{},panel:{},combo:{},config: {},view: {}
 });
-Ext.reg('faqman',faqMan);
-faqMan = new faqMan();
+Ext.reg('faqman',Faqman);
+Faqman = new Faqman();
 
-faqMan.combo.PublishStatus = function(config) {
+Faqman.combo.PublishStatus = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         store: [[1, _('published')], [0, _('unpublished')]]
@@ -21,9 +21,9 @@ faqMan.combo.PublishStatus = function(config) {
         ,forceSelection: true
         ,enableKeyEvents: true
     });
-    faqMan.combo.PublishStatus.superclass.constructoru.call(this, config);
+    Faqman.combo.PublishStatus.superclass.constructor.call(this, config);
 };
-Ext.extend(faqMan.combo.PublishStatus, MODx.combo.ComboBox);
-Ext.reg('faq-combo-publish-status', faqMan.combo.PublishStatus);
+Ext.extend(Faqman.combo.PublishStatus, MODx.combo.ComboBox);
+Ext.reg('faq-combo-publish-status', Faqman.combo.PublishStatus);
 
-faqMan.PanelSpacer = { html: '<br />', border: false, cls: 'faq-panel-spacer' };
+Faqman.PanelSpacer = { html: '<br />', border: false, cls: 'faq-panel-spacer' };

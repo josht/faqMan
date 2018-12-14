@@ -16,8 +16,6 @@
  * You should have received a copy of the GNU General Public License along with
  * faqMan; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package faqman
  */
 /**
  * The base class for faqMan.
@@ -25,11 +23,14 @@
  * @package faqman
  */
 class faqMan {
-    /* Establish constants to for type column in database */
-    const FAQ_TYPE_Q = 0;
-    const FAQ_TYPE_C = 1;
+	public $modx;
+	public $config = [];
 
-    function __construct(modX &$modx,array $config = array()) {
+    /* Establish constants to for type column in database */
+    public const FAQ_TYPE_Q = 0;
+    public const FAQ_TYPE_C = 1;
+
+    public function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
 
         $corePath = $this->modx->getOption('faqman.core_path',$config,$this->modx->getOption('core_path').'components/faqman/');
@@ -50,6 +51,7 @@ class faqMan {
             'chunkSuffix' => '.chunk.tpl',
             'snippetsPath' => $corePath.'elements/snippets/',
             'processorsPath' => $corePath.'processors/',
+            'templatesPath' => $corePath.'templates/',
         ),$config);
 
         $this->modx->addPackage('faqman',$this->config['modelPath']);
@@ -115,7 +117,8 @@ class faqMan {
         }
         $chunk->setCacheable(false);
         return $chunk->process($properties);
-    }
+	}
+
     /**
      * Returns a modChunk object from a template file.
      *

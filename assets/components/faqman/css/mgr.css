@@ -7,14 +7,15 @@
 	float: left;
 	color: #aaa;
 }
+
 .main-column a {
 	float: left;
 }
-.main-column {
-}
+
 .answer {
 	margin-left: 20px;
 }
+
 .faq-question-column {
 	padding: 1px 0 30px 0;
 }

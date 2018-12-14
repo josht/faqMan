@@ -20,14 +20,21 @@
  * @package faqman
  */
 /**
- * Loads the home page.
+ * Publish an FAQ Set
  *
  * @package faqman
- * @subpackage controllers
+ * @subpackage processors
  */
-$modx->regClientStartupScript($faqMan->config['jsUrl'].'mgr/widgets/sets.grid.js');
-$modx->regClientStartupScript($faqMan->config['jsUrl'].'mgr/widgets/home.panel.js');
-$modx->regClientStartupScript($faqMan->config['jsUrl'].'mgr/sections/home.js');
-$output = '<div id="faqman-panel-home-div"></div>';
+class FaqmanSetPublishProcessor extends modObjectUpdateProcessor {
+    public $classKey = 'faqManSet';
+    public $languageTopic = array('faqman:default');
+    public $objectType = 'faqman.faqman';
 
-return $output;
+    public function beforeSave() {
+        $this->object->set('published', 0);
+
+        return true;
+    }
+}
+
+return 'FaqmanSetPublishProcessor';

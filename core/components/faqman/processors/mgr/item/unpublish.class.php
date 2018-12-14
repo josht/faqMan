@@ -20,25 +20,21 @@
  * @package faqman
  */
 /**
- * Publish an FAQ Set
+ * Publish an Item
  *
  * @package faqman
  * @subpackage processors
  */
-/* get item */
-if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.item_err_ns'));
+class FaqmanItemUnpublishProcessor extends modObjectUpdateProcessor {
+    public $classKey = 'faqManItem';
+    public $languageTopic = array('faqman:default');
+    public $objectType = 'faqman.faqman';
 
-$set = $modx->getObject('faqManSet', $scriptProperties['id']);
+    public function beforeSave() {
+        $this->object->set('published', 0);
 
-if (!$set) return $modx->error->failure($modx->lexicon('faqman.item_err_nf'));
-
-// Mark as published
-$set->set('published', 1);
-
-if ($set->save() == false) {
-    return $modx->error->failure($modx->lexicon('faqman.item_err_save'));
+        return true;
+    }
 }
 
-/* output */
-$setArray = $set->toArray('', true);
-return $modx->error->success('', $setArray);
+return 'FaqmanItemUnpublishProcessor';

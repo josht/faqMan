@@ -1,4 +1,4 @@
-faqMan.grid.Items = function(config) {
+Faqman.grid.Items = function(config) {
     config = config || {};
 
     this.exp = new Ext.grid.RowExpander({
@@ -9,9 +9,9 @@ faqMan.grid.Items = function(config) {
 
     Ext.applyIf(config,{
         id: 'faqman-grid-items'
-        ,url: faqMan.config.connector_url
+        ,url: Faqman.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/item/getlist'
+            action: 'mgr/item/getList'
             ,set: config.setid
         }
         ,fields: ['id', 'question', 'answer', 'set', 'rank', 'actions']
@@ -78,7 +78,6 @@ faqMan.grid.Items = function(config) {
             ,'->'
             ,{
                 xtype: 'textfield'
-                ,name: 'search'
                 ,id: 'faqman-tf-search'
                 ,emptyText: _('search')+'...'
                 ,listeners: {
@@ -87,9 +86,10 @@ faqMan.grid.Items = function(config) {
                         new Ext.KeyMap(cmp.getEl(), {
                             key: Ext.EventObject.ENTER
                             ,fn: function() {
-                                this.fireEvent('change',this.getValue());
+                                this.fireEvent('change',this);
                                 this.blur();
-                                return true;}
+                                return true;
+                            }
                             ,scope: cmp
                         });
                     },scope:this}
@@ -106,13 +106,13 @@ faqMan.grid.Items = function(config) {
             }
         ]
     });
-    faqMan.grid.Items.superclass.constructor.call(this,config);
+    Faqman.grid.Items.superclass.constructor.call(this,config);
     this._makeTemplate();
     this.addEvents('sort');
     this.on('sort',this.onSort,this);
     this.on('click', this.handleButtons, this);
 };
-Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
+Ext.extend(Faqman.grid.Items,MODx.grid.Grid,{
     windows: {}
 
     ,onSort: function(o) {
@@ -155,19 +155,22 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         }
         return 'x-grid3-row-collapsed';
     }
+
     ,clearFilter: function() {
         var s = this.getStore();
-        s.baseParams.search = '';
+        s.baseParams.query = '';
         Ext.getCmp('faqman-tf-search').reset();
         this.getBottomToolbar().changePage(1);
         this.refresh();
     }
+
     ,search: function(tf,newValue,oldValue) {
-        this.getStore().baseParams.search = newValue || tf;
+        var s = this.getStore();
+        s.baseParams.query = tf.getValue();
         this.getBottomToolbar().changePage(1);
         this.refresh();
-        return true;
     }
+
     ,getMenu: function() {
         var m = [];
         m.push({
@@ -217,7 +220,7 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         MODx.msg.confirm({
             title: _('faqman.item_remove')
             ,text: _('faqman.item_remove_confirm')
-            ,url: this.config.url
+            ,url: Faqman.config.connectorUrl
             ,params: {
                 action: 'mgr/item/remove'
                 ,id: this.menu.record.id
@@ -231,9 +234,10 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
     ,_renderQuestion: function(value, p, record) {
         return this.tplQuestion.apply(record.data);
     }
+
     ,publishItem: function() {
         MODx.Ajax.request({
-            url: faqMan.config.connector_url
+            url: Faqman.config.connectorUrl
             ,params: {
                 action: 'mgr/item/publish'
                 ,id: this.menu.record.id
@@ -245,9 +249,10 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         return true;
 
     }
+
     ,unpublishItem: function(record) {
         MODx.Ajax.request({
-            url: faqMan.config.connector_url
+            url: Faqman.config.connectorUrl
             ,params: {
                 action: 'mgr/item/unpublish'
                 ,id: this.menu.record.id
@@ -285,10 +290,10 @@ Ext.extend(faqMan.grid.Items,MODx.grid.Grid,{
         }
     }
 });
-Ext.reg('faqman-grid-items',faqMan.grid.Items);
+Ext.reg('faqman-grid-items',Faqman.grid.Items);
 
 
-faqMan.window.CreateItem = function(config) {
+Faqman.window.CreateItem = function(config) {
     config = config || {};
     this.ident = config.ident || 'mecitem'+Ext.id();
     Ext.applyIf(config,{
@@ -297,7 +302,7 @@ faqMan.window.CreateItem = function(config) {
         ,autoHeight: true
         ,width: 650
         ,modal: true
-        ,url: faqMan.config.connector_url
+        ,url: Faqman.config.connectorUrl
         ,closeAction: 'close'
         ,baseParams: {
             action: 'mgr/item/create'
@@ -308,27 +313,27 @@ faqMan.window.CreateItem = function(config) {
             ,fieldLabel: _('faqman.question')
             ,name: 'question'
             ,id: 'faqman-'+this.ident+'-question'
-            ,width: '94%'
+            ,anchor: '100%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('faqman.answer')
             ,name: 'answer'
             ,id: 'faqman-'+this.ident+'-answer'
-            ,width: '94%'
+            ,anchor: '100%'
             ,height: 250
         }],
         keys: [] //Prevent enter key from submitting the form
     });
-    faqMan.window.CreateItem.superclass.constructor.call(this,config);
+    Faqman.window.CreateItem.superclass.constructor.call(this,config);
     this.on('activate',function() {
         if (MODx.loadRTE) { MODx.loadRTE('faqman-'+this.ident+'-answer'); }
     });
 };
-Ext.extend(faqMan.window.CreateItem,MODx.Window);
-Ext.reg('faqman-window-item-create',faqMan.window.CreateItem);
+Ext.extend(Faqman.window.CreateItem,MODx.Window);
+Ext.reg('faqman-window-item-create',Faqman.window.CreateItem);
 
 
-faqMan.window.UpdateItem = function(config) {
+Faqman.window.UpdateItem = function(config) {
     config = config || {};
     this.ident = config.ident || 'meuitem'+Ext.id();
     Ext.applyIf(config,{
@@ -337,7 +342,7 @@ faqMan.window.UpdateItem = function(config) {
         ,autoHeight: true
         ,width: 650
         ,modal: true
-        ,url: faqMan.config.connector_url
+        ,url: Faqman.config.connectorUrl
         ,action: 'mgr/item/update'
         ,closeAction: 'close'
         ,fields: [{
@@ -349,22 +354,22 @@ faqMan.window.UpdateItem = function(config) {
             ,fieldLabel: _('faqman.question')
             ,name: 'question'
             ,id: 'faqman-'+this.ident+'-question'
-            ,width: '94%'
+            ,anchor: '100%'
         },{
             xtype: 'textarea'
             ,fieldLabel: _('faqman.answer')
             ,name: 'answer'
             ,id: 'faqman-'+this.ident+'-answer'
-            ,width: '94%'
+            ,anchor: '100%'
             ,height: 250
         }],
         keys: [] //Prevent enter key from submitting the form
     });
-    faqMan.window.UpdateItem.superclass.constructor.call(this,config);
+    Faqman.window.UpdateItem.superclass.constructor.call(this,config);
     this.on('activate',function() {
         if (MODx.loadRTE) { MODx.loadRTE('faqman-'+this.ident+'-answer'); }
     });
 };
-Ext.extend(faqMan.window.UpdateItem,MODx.Window);
-Ext.reg('faqman-window-item-update',faqMan.window.UpdateItem);
+Ext.extend(Faqman.window.UpdateItem,MODx.Window);
+Ext.reg('faqman-window-item-update',Faqman.window.UpdateItem);
 
