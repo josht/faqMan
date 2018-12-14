@@ -134,11 +134,11 @@ Ext.extend(Faqman.grid.Items,MODx.grid.Grid,{
 
     ,_makeTemplate: function() {
         this.tplQuestion = new Ext.XTemplate('<tpl for="."><div class="faq-question-column">'
-                                            +'<h3 class="main-column"><a href="{action_edit}" title="Edit {question}">{question}</a><span class="question-id">({id})</span></h3>'
+                                            +'<h3 class="main-column"><span class="question-id">({id})</span><span class="faq-question">{question}</span></h3>'
                                                 +'<tpl if="actions">'
                                                     +'<ul class="actions">'
                                                         +'<tpl for="actions">'
-                                                            +'<li><a href="#" class="controlBtn {className}">{text}</a></li>'
+                                                            +'<li><button href="#" class="controlBtn {className}">{text}</button></li>'
                                                         +'</tpl>'
                                                     +'</ul>'
                                                 +'</tpl>'

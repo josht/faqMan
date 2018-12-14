@@ -17,18 +17,20 @@ Faqman.panel.Home = function(config) {
             ,items: [
                 {
                     title: _('faqman.sets')
-                    ,items: [{
-                        html: '<p>'+_('faqman.set_intro_msg')+'</p>'
-                        ,border: false
-                        ,bodyCssClass: 'panel-desc'
-                }
-                ,{
-                    xtype: 'faqman-grid-sets'
-                    ,preventRender: true
-                    ,cls: 'main-wrapper'
+                    ,items: [
+                        // {
+                        //     html: '<p>'+_('faqman.set_intro_msg')+'</p>'
+                        //     ,border: false
+                        //     ,bodyCssClass: 'panel-desc'
+                        // }
+                        {
+                            xtype: 'faqman-grid-sets'
+                            ,preventRender: true
+                            ,cls: 'main-wrapper'
+                        }
+                    ]
                 }
             ]
-            }]
         }]
     });
     Faqman.panel.Home.superclass.constructor.call(this,config);

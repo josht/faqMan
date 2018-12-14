@@ -15,17 +15,20 @@ Faqman.panel.Set = function(config) {
             ,activeItem: 0
             ,hideMode: 'offsets'
             ,items: [{
-                title: _('faqman.items')
-                ,items: [{
-                    html: '<p>'+_('faqman.item_intro_msg')+'</p>'
-                    ,border:false
-                    ,bodyCssClass: 'panel-desc'
-                },{
-                    xtype: 'faqman-grid-items'
-                    ,setid: config.setid
-                    ,preventRender: true
-                    ,cls: 'main-wrapper'
-                }]
+                // title: _('faqman.items')
+                items: [
+                    // {
+                    //     html: '<p>'+_('faqman.item_intro_msg')+'</p>'
+                    //     ,border:false
+                    //     ,bodyCssClass: 'panel-desc'
+                    // }
+                    {
+                        xtype: 'faqman-grid-items'
+                        ,setid: config.setid
+                        ,preventRender: true
+                        ,cls: 'main-wrapper'
+                    }
+                ]
             }]
         }]
     });

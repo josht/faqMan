@@ -1,15 +1,9 @@
 #faqman-grid-items .question-id {
-	font-size: 11px;
+	font-size: .83em;
 	font-weight: normal;
-	display: block;
-	margin-bottom: 3px;
-	padding-left: 5px;
-	float: left;
-	color: #aaa;
-}
-
-.main-column a {
-	float: left;
+    padding-right: 4px;
+    color: #555;
+    vertical-align: super;
 }
 
 .answer {
