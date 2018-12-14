@@ -65,6 +65,12 @@ class FaqmanSetManagerController extends \modExtraManagerController {
 
     public function loadCustomCssJs() {
 
+        // Load anything set when envoking OnRichTextEditorInit
+        $rte = $this->loadRTE();
+        if (!empty($rte)) {
+            $this->addHtml($rte);
+        }
+
         $this->addJavascript($this->faqman->config['jsUrl'] . 'mgr/widgets/items.grid.js');
         $this->addJavascript($this->faqman->config['jsUrl'] . 'mgr/widgets/set.panel.js');
         $this->addLastJavascript($this->faqman->config['jsUrl'] . 'mgr/sections/set.js');
@@ -73,5 +79,24 @@ class FaqmanSetManagerController extends \modExtraManagerController {
 
     public function getTemplateFile() {
         return $this->faqman->config['templatesPath'] . 'set.tpl';
+    }
+
+    private function loadRTE() {
+        // See if we need to load a richtext editor.
+        $useRichText = $this->modx->getOption('faqman.use_richtext', $this->faqman->config, false);
+        $useEditor = $this->modx->getOption('use_editor');
+        $whichEditor = $this->modx->getOption('which_editor');
+        if ($useRichText && $useEditor && !empty($whichEditor)) {
+            // Invoke OnRichTextEditorInit event to prepare RTE
+            $onRichTextEditorInit = $this->modx->invokeEvent('OnRichTextEditorInit',array(
+                'editor' => $whichEditor,
+                'elements' => array(),
+            ));
+            if (is_array($onRichTextEditorInit)) {
+                $onRichTextEditorInit = implode('', $onRichTextEditorInit);
+            }
+
+            return $onRichTextEditorInit;
+        }
     }
 }
