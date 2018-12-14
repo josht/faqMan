@@ -54,7 +54,9 @@
      * return void
      */
     private function setRank() {
-        $count = $this->modx->getCount($this->classKey);
+        $count = $this->modx->getCount($this->classKey, [
+            'set' => $this->getProperty('set', false)
+        ]);
         $this->object->set('rank', $count);
     }
  }
