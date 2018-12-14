@@ -4,8 +4,6 @@ Changelog for faqMan.
 =====================
 - Update to use class based processors
 - Edit FAQ Sets in-line on the grid
-
-Bug Fixes
 - FAQ Set's can now be sorted in the manager
 - Cleanup manager page styles
 
