@@ -16,8 +16,8 @@ Faqman.panel.Home = function(config) {
             ,hideMode: 'offsets'
             ,items: [
                 {
-                    title: _('faqman.sets')
-                    ,items: [
+                    // title: _('faqman.sets')
+                    items: [
                         // {
                         //     html: '<p>'+_('faqman.set_intro_msg')+'</p>'
                         //     ,border: false

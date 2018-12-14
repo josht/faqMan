@@ -31,13 +31,6 @@
     public $objectType = 'faqman.faqman';
 
     public function beforeSave() {
-        $name = $this->getProperty('name');
-        if (empty($name)) {
-            $this->addFieldError('name',$this->modx->lexicon('faqman.set_err_ns_name'));
-        } else if ($this->doesAlreadyExist(array('name' => $name))) {
-            $this->addFieldError('name',$this->modx->lexicon('faqman.item_err_ae'));
-        }
-
         $this->setRank();
 
         return parent::beforeSave();
