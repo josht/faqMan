@@ -18,7 +18,7 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 /**
- * Resolve paths. These are useful to change if you want to debug and/or develop
+ * Resolve settings. These are useful to change if you want to debug and/or develop
  * in a directory outside of the MODx webroot. They are not required to set
  * for basic usage.
  *
@@ -45,11 +45,11 @@ if ($object->xpdo) {
             $modx =& $object->xpdo;
 
             /* setup paths */
-            //createSetting($modx,'core_path',$modx->getOption('core_path').'components/faqman/');
-            //createSetting($modx,'assets_path',$modx->getOption('assets_path').'components/faqman/');
+            //createSetting($modx,'faqman.core_path',$modx->getOption('core_path').'components/faqman/');
+            //createSetting($modx,'faqman.assets_path',$modx->getOption('assets_path').'components/faqman/');
 
             /* setup urls */
-            //createSetting($modx,'assets_url',$modx->getOption('assets_url').'components/faqman/');
+            //createSetting($modx,'faqman.assets_url',$modx->getOption('assets_url').'components/faqman/');
         break;
     }
 }

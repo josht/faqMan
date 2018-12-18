@@ -33,7 +33,7 @@ set_time_limit(0);
 define('PKG_NAME','faqMan');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
 define('PKG_VERSION','2.0.0');
-define('PKG_RELEASE','rc1');
+define('PKG_RELEASE','rc2');
 
 // Define sources
 $root    = dirname(dirname(__FILE__)) . '/';
@@ -181,6 +181,9 @@ if (empty($menu)) {
     ));
     $vehicle->resolve('php', array(
         'source' => $sources['resolvers'] . 'resolve.paths.php',
+    ));
+    $vehicle->resolve('php', array(
+        'source' => $sources['resolvers'] . 'resolve.files.php',
     ));
     $builder->putVehicle($vehicle);
     $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in menu.');
