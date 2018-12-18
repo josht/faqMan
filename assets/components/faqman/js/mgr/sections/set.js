@@ -5,8 +5,7 @@ Faqman.page.Set = function(config) {
             text: _('faqman.back_to_sets')
             ,id: 'faqman-btn-back'
             ,handler: function() {
-                console.log('click: ', Faqman);
-                location.href = '?a=index&namespace='+Faqman.request.namespace;
+                MODx.loadPage('?a=index&namespace='+Faqman.request.namespace);
             }
             ,scope: this
         }]

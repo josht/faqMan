@@ -148,7 +148,7 @@ Ext.extend(Faqman.grid.Sets,MODx.grid.Grid,{
         } else {
             redir += this.menu.record.id;
         }
-        location.href = redir;
+        MODx.loadPage(redir);
     }
 
     ,createSet: function(btn,e) {
