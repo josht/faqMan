@@ -59,40 +59,6 @@ class faqMan {
     }
 
     /**
-     * Initializes faqMan into different contexts.
-     *
-     * @access public
-     * @param string $ctx The context to load. Defaults to web.
-     * @return string
-     */
-	public function initialize($ctx = 'web') {
-        switch ($ctx) {
-            case 'mgr':
-                if (!$this->modx->loadClass('faqman.request.faqManControllerRequest',$this->config['modelPath'],true,true)) {
-                    return 'Could not load controller request handler.';
-                }
-                $this->request = new faqManControllerRequest($this);
-                return $this->request->handleRequest();
-            break;
-            case 'connector':
-                if (!$this->modx->loadClass('faqman.request.faqManConnectorRequest',$this->config['modelPath'],true,true)) {
-                    return 'Could not load connector request handler.';
-                }
-                $this->request = new faqManConnectorRequest($this);
-                return $this->request->handle();
-            break;
-            default:
-                /* if you wanted to do any generic frontend stuff here.
-                 * For example, if you have a lot of snippets but common code
-                 * in them all at the beginning, you could put it here and just
-                 * call $faqman->initialize($modx->context->get('key'));
-                 * which would run this.
-                 */
-            break;
-        }
-    }
-
-    /**
      * Gets a Chunk and caches it; also falls back to file-based templates
      * for easier debugging.
      *

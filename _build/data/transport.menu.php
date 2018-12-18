@@ -18,34 +18,19 @@
  * Place, Suite 330, Boston, MA 02111-1307 USA
  */
 /**
- * Adds modActions and modMenus into package
+ * Adds modMenu items into package
  *
  * @package faqman
  * @subpackage build
  */
-$action= $modx->newObject('modAction');
-$action->fromArray(array(
-    'id'          => 1,
-    'namespace'   => 'faqman',
-    'parent'      => 0,
-    'controller'  => 'index',
-    'haslayout'   => true,
-    'lang_topics' => 'faqman:default',
-    'assets'      => '',
-), '', true, true);
-
 /* load action into menu */
 $menu= $modx->newObject('modMenu');
 $menu->fromArray(array(
     'text'        => 'faqman',
     'parent'      => 'components',
     'description' => 'faqman.menu_desc',
-    'icon'        => 'images/icons/plugin.gif',
-    'menuindex'   => 0,
-    'params'      => '',
-    'handler'     => '',
+    'action'      => 'index',
+    'namespace'   => 'faqman'
 ), '', true, true);
-$menu->addOne($action);
-unset($action);
 
 return $menu;
