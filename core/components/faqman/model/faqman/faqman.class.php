@@ -27,8 +27,8 @@ class faqMan {
 	public $config = [];
 
     /* Establish constants to for type column in database */
-    public const FAQ_TYPE_Q = 0;
-    public const FAQ_TYPE_C = 1;
+    const FAQ_TYPE_Q = 0;
+    const FAQ_TYPE_C = 1;
 
     public function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
