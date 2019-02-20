@@ -33,7 +33,7 @@ set_time_limit(0);
 define('PKG_NAME','faqMan');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
 define('PKG_VERSION','2.0.0');
-define('PKG_RELEASE','rc2');
+define('PKG_RELEASE','rc3');
 
 // Define sources
 $root    = dirname(dirname(__FILE__)) . '/';
