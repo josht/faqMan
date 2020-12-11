@@ -1,5 +1,11 @@
 Changelog for faqMan.
 
+2.0.0 pl
+=====================
+- Fix bug when sorting by rank on MySQL v8
+- Updated default property that has been incorrect on the main faqMan snippet. (Yay for 10 year old bugs!)
+- Also, happy belated 10th birthday FAQ Manager!
+
 2.0.0 rc3
 =====================
 - Fix for PHP versions <7.1
