@@ -37,7 +37,7 @@ $properties = array(
         'desc'    => 'prop_faqman.tpl_desc',
         'type'    => 'textfield',
         'options' => '',
-        'value'   => 'Faqs',
+        'value'   => '',
         'lexicon' => 'faqman:properties',
     ),
     array(
