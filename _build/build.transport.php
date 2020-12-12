@@ -32,7 +32,7 @@ set_time_limit(0);
 // Define package
 define('PKG_NAME','faqMan');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','2.0.0');
+define('PKG_VERSION','2.0.1');
 define('PKG_RELEASE','pl');
 
 // Define sources

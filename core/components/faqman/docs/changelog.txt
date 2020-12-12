@@ -1,5 +1,9 @@
 Changelog for faqMan.
 
+2.0.1 pl
+=====================
+- 2.0.0 pl package was not build correctly. This version actually has all the updated files!
+
 2.0.0 pl
 =====================
 - Fix bug when sorting by rank on MySQL v8
