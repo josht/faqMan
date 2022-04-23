@@ -16,8 +16,6 @@
  * You should have received a copy of the GNU General Public License along with
  * faqMan; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package faqman
  */
 /**
  * The base class for faqMan.
@@ -25,11 +23,14 @@
  * @package faqman
  */
 class faqMan {
+	public $modx;
+	public $config = [];
+
     /* Establish constants to for type column in database */
     const FAQ_TYPE_Q = 0;
     const FAQ_TYPE_C = 1;
 
-    function __construct(modX &$modx,array $config = array()) {
+    public function __construct(modX &$modx,array $config = array()) {
         $this->modx =& $modx;
 
         $corePath = $this->modx->getOption('faqman.core_path',$config,$this->modx->getOption('core_path').'components/faqman/');
@@ -50,44 +51,11 @@ class faqMan {
             'chunkSuffix' => '.chunk.tpl',
             'snippetsPath' => $corePath.'elements/snippets/',
             'processorsPath' => $corePath.'processors/',
+            'templatesPath' => $corePath.'templates/',
         ),$config);
 
         $this->modx->addPackage('faqman',$this->config['modelPath']);
         $this->modx->lexicon->load('faqman:default');
-    }
-
-    /**
-     * Initializes faqMan into different contexts.
-     *
-     * @access public
-     * @param string $ctx The context to load. Defaults to web.
-     * @return string
-     */
-	public function initialize($ctx = 'web') {
-        switch ($ctx) {
-            case 'mgr':
-                if (!$this->modx->loadClass('faqman.request.faqManControllerRequest',$this->config['modelPath'],true,true)) {
-                    return 'Could not load controller request handler.';
-                }
-                $this->request = new faqManControllerRequest($this);
-                return $this->request->handleRequest();
-            break;
-            case 'connector':
-                if (!$this->modx->loadClass('faqman.request.faqManConnectorRequest',$this->config['modelPath'],true,true)) {
-                    return 'Could not load connector request handler.';
-                }
-                $this->request = new faqManConnectorRequest($this);
-                return $this->request->handle();
-            break;
-            default:
-                /* if you wanted to do any generic frontend stuff here.
-                 * For example, if you have a lot of snippets but common code
-                 * in them all at the beginning, you could put it here and just
-                 * call $faqman->initialize($modx->context->get('key'));
-                 * which would run this.
-                 */
-            break;
-        }
     }
 
     /**
@@ -115,7 +83,8 @@ class faqMan {
         }
         $chunk->setCacheable(false);
         return $chunk->process($properties);
-    }
+	}
+
     /**
      * Returns a modChunk object from a template file.
      *

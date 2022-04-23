@@ -20,18 +20,31 @@
  * @package faqman
  */
 /**
- * Get an FAQ set
+ * Create an FAQ set
  *
  * @package faqman
  * @subpackage processors
  */
-/* Get set */
-if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.set_err_ns'));
+ class FaqmanSetCreateProcessor extends modObjectCreateProcessor {
+    public $classKey = 'faqManSet';
+    public $languageTopic = array('faqman:default');
+    public $objectType = 'faqman.faqman';
 
-$set = $modx->getObject('faqManSet', $scriptProperties['id']);
+    public function beforeSave() {
+        $this->setRank();
 
-if (!$set) return $modx->error->failure($modx->lexicon('faqman.set_err_nf'));
+        return parent::beforeSave();
+    }
 
-/* output */
-$setArray = $set->toArray('', true);
-return $modx->error->success('', $setArray);
+    /**
+     * New FAQ Sets get added to the end of the list
+     *
+     * return void
+     */
+    private function setRank() {
+        $count = $this->modx->getCount($this->classKey);
+        $this->object->set('rank', $count);
+    }
+ }
+
+ return 'FaqmanSetCreateProcessor';

@@ -16,8 +16,6 @@
  * You should have received a copy of the GNU General Public License along with
  * faqMan; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
- *
- * @package faqman
  */
 /**
  * faqMan build script
@@ -34,7 +32,7 @@ set_time_limit(0);
 // Define package
 define('PKG_NAME','faqMan');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','1.3.0');
+define('PKG_VERSION','2.0.1');
 define('PKG_RELEASE','pl');
 
 // Define sources
@@ -71,7 +69,11 @@ $modx->setLogTarget('ECHO');
 $modx->loadClass('transport.modPackageBuilder', '', false, true);
 $builder = new modPackageBuilder($modx);
 $builder->createPackage(PKG_NAME_LOWER, PKG_VERSION, PKG_RELEASE);
-$builder->registerNamespace(PKG_NAME_LOWER, false, true, '{core_path}components/' . PKG_NAME_LOWER . '/');
+$builder->registerNamespace(
+    PKG_NAME_LOWER, false, true,
+    '{core_path}components/' . PKG_NAME_LOWER . '/',
+    '{assets_path}components/' . PKG_NAME_LOWER . '/'
+);
 $modx->log(modX::LOG_LEVEL_INFO, 'Created Transport Package and Namespace.');
 
 // Create category
@@ -165,14 +167,7 @@ if (empty($menu)) {
         xPDOTransport::PRESERVE_KEYS             => true,
         xPDOTransport::UPDATE_OBJECT             => true,
         xPDOTransport::UNIQUE_KEY                => 'text',
-        xPDOTransport::RELATED_OBJECTS           => true,
-        xPDOTransport::RELATED_OBJECT_ATTRIBUTES => array (
-            'Action' => array (
-                xPDOTransport::PRESERVE_KEYS => false,
-                xPDOTransport::UPDATE_OBJECT => true,
-                xPDOTransport::UNIQUE_KEY    => array ('namespace','controller'),
-            ),
-        ),
+        xPDOTransport::RELATED_OBJECTS           => false,
     ));
     $modx->log(modX::LOG_LEVEL_INFO, 'Adding in PHP resolvers...');
     $vehicle->resolve('php', array(
@@ -186,6 +181,9 @@ if (empty($menu)) {
     ));
     $vehicle->resolve('php', array(
         'source' => $sources['resolvers'] . 'resolve.paths.php',
+    ));
+    $vehicle->resolve('php', array(
+        'source' => $sources['resolvers'] . 'resolve.files.php',
     ));
     $builder->putVehicle($vehicle);
     $modx->log(modX::LOG_LEVEL_INFO, 'Packaged in menu.');

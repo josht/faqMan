@@ -36,7 +36,7 @@ if (!$showUnpublished) {
     $c->where(array('published' => true));
 }
 
-$c->sortby($sortBy,$sortDir);
+$c->sortby($modx->quote($sortBy),$sortDir);
 if (!empty($limit)) $c->limit($limit);
 $items = $modx->getCollection('faqManSet',$c);
 
@@ -54,7 +54,7 @@ foreach ($items as $item) {
     if (!$showUnpublished) {
         $criteria->where(array('published' => true));
     }
-    $criteria->sortby('rank','ASC');
+    $criteria->sortby($modx->quote('rank'),'ASC');
     $criteria->limit($limitQuestions);
     $questions = $item->getMany('Item',$criteria);
 

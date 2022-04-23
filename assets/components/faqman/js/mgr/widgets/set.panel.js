@@ -1,4 +1,4 @@
-faqMan.panel.Set = function(config) {
+Faqman.panel.Set = function(config) {
     config = config || {};
     Ext.apply(config,{
         border: false
@@ -15,21 +15,24 @@ faqMan.panel.Set = function(config) {
             ,activeItem: 0
             ,hideMode: 'offsets'
             ,items: [{
-                title: _('faqman.items')
-                ,items: [{
-                    html: '<p>'+_('faqman.item_intro_msg')+'</p>'
-                    ,border:false
-                    ,bodyCssClass: 'panel-desc'
-                },{
-                    xtype: 'faqman-grid-items'
-                    ,setid: config.setid
-                    ,preventRender: true
-                    ,cls: 'main-wrapper'
-                }]
+                // title: _('faqman.items')
+                items: [
+                    // {
+                    //     html: '<p>'+_('faqman.item_intro_msg')+'</p>'
+                    //     ,border:false
+                    //     ,bodyCssClass: 'panel-desc'
+                    // }
+                    {
+                        xtype: 'faqman-grid-items'
+                        ,setid: config.setid
+                        ,preventRender: true
+                        ,cls: 'main-wrapper'
+                    }
+                ]
             }]
         }]
     });
-    faqMan.panel.Set.superclass.constructor.call(this,config);
+    Faqman.panel.Set.superclass.constructor.call(this,config);
 };
-Ext.extend(faqMan.panel.Set,MODx.Panel);
-Ext.reg('faqman-panel-set',faqMan.panel.Set);
+Ext.extend(Faqman.panel.Set,MODx.Panel);
+Ext.reg('faqman-panel-set',Faqman.panel.Set);

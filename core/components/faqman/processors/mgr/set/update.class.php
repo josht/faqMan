@@ -20,9 +20,15 @@
  * @package faqman
  */
 /**
+ * Update an Item
+ *
  * @package faqman
- * @subpackage controllers
+ * @subpackage processors
  */
-require_once dirname(dirname(__FILE__)).'/model/faqman/faqman.class.php';
-$faqMan = new faqMan($modx);
-return $faqMan->initialize('mgr');
+ class FaqmanSetUpdateProcessor extends modObjectUpdateProcessor {
+    public $classKey = 'faqManSet';
+    public $languageTopic = array('faqman:default');
+    public $objectType = 'faqman.faqman';
+}
+
+return 'FaqmanSetUpdateProcessor';

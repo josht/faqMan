@@ -1,18 +1,11 @@
-Ext.onReady(function() {
-    MODx.load({
-        xtype: 'faqman-page-set'
-        ,setid: faqMan.request.setid
-    });
-});
-
-faqMan.page.Set = function(config) {
+Faqman.page.Set = function(config) {
     config = config || {};
     Ext.applyIf(config,{
         buttons: [{
             text: _('faqman.back_to_sets')
             ,id: 'faqman-btn-back'
             ,handler: function() {
-                location.href = '?a='+faqMan.request.a+'&action=home';
+                MODx.loadPage('?a=index&namespace='+Faqman.request.namespace);
             }
             ,scope: this
         }]
@@ -22,7 +15,7 @@ faqMan.page.Set = function(config) {
             ,setid: config.setid
         }]
     });
-    faqMan.page.Set.superclass.constructor.call(this,config);
+    Faqman.page.Set.superclass.constructor.call(this,config);
 };
-Ext.extend(faqMan.page.Set,MODx.Component);
-Ext.reg('faqman-page-set',faqMan.page.Set);
+Ext.extend(Faqman.page.Set,MODx.Component);
+Ext.reg('faqman-page-set',Faqman.page.Set);

@@ -20,25 +20,23 @@
  * @package faqman
  */
 /**
- * Publish an FAQ Set
+ * Update an Item
  *
  * @package faqman
  * @subpackage processors
  */
-/* get item */
-if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.item_err_ns'));
+require_once dirname(__FILE__) . '/update.class.php';
 
-$set = $modx->getObject('faqManSet', $scriptProperties['id']);
-
-if (!$set) return $modx->error->failure($modx->lexicon('faqman.item_err_nf'));
-
-// Mark as published
-$set->set('published', 0);
-
-if ($set->save() == false) {
-    return $modx->error->failure($modx->lexicon('faqman.item_err_save'));
+class FaqmanSetUpdateFromGridProcessor extends FaqmanSetUpdateProcessor {
+    public function initialize() {
+        $data = $this->getProperty('data');
+        if (empty($data)) return $this->modx->lexicon('invalid_data');
+        $data = $this->modx->fromJSON($data);
+        if (empty($data)) return $this->modx->lexicon('invalid_data');
+        $this->setProperties($data);
+        $this->unsetProperty('data');
+        return parent::initialize();
+    }
 }
 
-/* output */
-$setArray = $set->toArray('', true);
-return $modx->error->success('', $setArray);
+return 'FaqmanSetUpdateFromGridProcessor';

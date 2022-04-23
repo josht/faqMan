@@ -20,23 +20,15 @@
  * @package faqman
  */
 /**
- * Publish an Item
+ * Remove an FAQ set.
  *
  * @package faqman
  * @subpackage processors
  */
-/* get item */
-if (empty($scriptProperties['id'])) return $modx->error->failure($modx->lexicon('faqman.item_err_ns'));
-$item = $modx->getObject('faqManItem', $scriptProperties['id']);
-if (!$item) return $modx->error->failure($modx->lexicon('faqman.item_err_nf'));
-
-// Mark as published
-$item->set('published', 0);
-
-if ($item->save() == false) {
-    return $modx->error->failure($modx->lexicon('faqman.item_err_save'));
+class FaqmanSetRemoveProcessor extends modObjectRemoveProcessor {
+    public $classKey = 'faqManSet';
+    public $languageTopic = array('faqman:default');
+    public $objectType = 'faqman.faqman';
 }
 
-/* output */
-$itemArray = $item->toArray('', true);
-return $modx->error->success('', $itemArray);
+return 'FaqmanSetRemoveProcessor';

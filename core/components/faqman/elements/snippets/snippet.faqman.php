@@ -65,7 +65,7 @@ foreach ($sets as $set) {
         $ci->where(array('published' => true));
     }
 
-    $ci->sortby($sortBy, $sortDir);
+    $ci->sortby($modx->quote($sortBy), $sortDir);
     if (!empty($limitQuestions)) $ci->limit($limitQuestions);
 
     foreach ($set->getMany('Item', $ci) as $item) {
