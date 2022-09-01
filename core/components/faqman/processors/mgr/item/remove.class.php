@@ -57,11 +57,11 @@ class FaqmanItemRemoveProcessor extends modObjectRemoveProcessor {
          */
         $this->modx->exec("
             UPDATE {$this->modx->getTableName($this->classKey)}
-            SET rank = rank - 1
+            SET `rank` = `rank` - 1
             WHERE
             `set` = {$this->set}
-            AND rank > {$this->rank}
-            AND rank > 0
+            AND `rank` > {$this->rank}
+            AND `rank` > 0
         ");
         return true;
     }
