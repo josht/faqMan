@@ -77,22 +77,22 @@ class FaqmanItemSortProcessor extends modObjectUpdateProcessor {
         if ($source->get('rank') < $target->get('rank')) {
             $this->modx->exec("
                 UPDATE {$this->modx->getTableName($this->classKey)}
-                  SET rank = rank - 1
+                  SET `rank` = `rank` - 1
                 WHERE
                   `set` = " . $this->getProperty('set', false) . "
-                AND rank <= {$target->get('rank')}
-                AND rank > {$source->get('rank')}
-                AND rank > 0
+                AND `rank` <= {$target->get('rank')}
+                AND `rank` > {$source->get('rank')}
+                AND `rank` > 0
             ");
             $newRank = $target->get('rank');
         } else {
             $this->modx->exec("
                 UPDATE {$this->modx->getTableName($this->classKey)}
-                  SET rank = rank + 1
+                  SET `rank` = `rank` + 1
                 WHERE
                   `set` = " . $this->getProperty('set', false) . "
-                AND rank >= {$target->get('rank')}
-                AND rank < {$source->get('rank')}
+                AND `rank` >= {$target->get('rank')}
+                AND `rank` < {$source->get('rank')}
             ");
             $newRank = $target->get('rank');
         }
