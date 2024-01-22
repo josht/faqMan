@@ -21,11 +21,10 @@
  * @package faqman
  * @subpackage controllers
  */
-require_once dirname(dirname(__FILE__)).'/model/faqman/faqman.class.php';
-class FaqmanIndexManagerController extends \modExtraManagerController {
+class FaqmanIndexManagerController extends modExtraManagerController {
     public $faqman;
     public function initialize() {
-        $this->faqman = new faqMan($this->modx);
+        $this->faqman = $this->modx->services->get('faqMan');
         $this->addCss($this->faqman->config['cssUrl'].'mgr.css');
         $this->addJavascript($this->faqman->config['jsUrl'].'mgr/faqman.js');
         $this->addHtml('<script>

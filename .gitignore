@@ -1,2 +1,10 @@
 _build/build.config.php
 config.core.php
+
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

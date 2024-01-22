@@ -16,24 +16,23 @@
  * You should have received a copy of the GNU General Public License along with
  * faqMan; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
- */
-/**
- * faqMan Connector
  *
  * @package faqman
  */
-require_once dirname(__FILE__, 5).'/config.core.php';
-require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
-require_once MODX_CONNECTORS_PATH.'index.php';
+namespace faqMan\Processors\Mgr\Set;
+use faqMan\Model\faqManSet;
+use MODX\Revolution\Processors\Model\GetListProcessor;
 
-$corePath = $modx->getOption('faqman.core_path',null,$modx->getOption('core_path').'components/faqman/');
-$modx->faqman = $modx->services->get('faqMan');
-
-$modx->lexicon->load('faqman:default');
-
-/* handle request */
-$path = $modx->getOption('processorsPath',$modx->faqman->config,$corePath.'src/Processors/');
-$modx->request->handleRequest(array(
-    'processors_path' => $path,
-    'location' => '',
-));
+/**
+ * Get a list of FAQ sets
+ *
+ * @package faqman
+ * @subpackage processors
+ */
+class getList extends GetListProcessor {
+    public $classKey = faqManSet::class;
+    public $languageTopic = array('faqman:default');
+    public $defaultSortField = 'rank';
+    public $defaultSortDirection = 'ASC';
+    public $objectType = 'faqman.faqman';
+}

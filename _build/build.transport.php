@@ -23,6 +23,9 @@
  * @package faqman
  * @subpackage build
  */
+
+use MODX\Revolution\Transport\modPackageBuilder;
+
 $mtime  = microtime();
 $mtime  = explode(' ', $mtime);
 $mtime  = $mtime[1] + $mtime[0];
@@ -32,7 +35,7 @@ set_time_limit(0);
 // Define package
 define('PKG_NAME','faqMan');
 define('PKG_NAME_LOWER',strtolower(PKG_NAME));
-define('PKG_VERSION','2.0.1');
+define('PKG_VERSION','2.0.2');
 define('PKG_RELEASE','pl');
 
 // Define sources

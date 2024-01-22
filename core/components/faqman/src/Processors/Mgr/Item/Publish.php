@@ -16,24 +16,27 @@
  * You should have received a copy of the GNU General Public License along with
  * faqMan; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
- */
-/**
- * faqMan Connector
  *
  * @package faqman
  */
-require_once dirname(__FILE__, 5).'/config.core.php';
-require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
-require_once MODX_CONNECTORS_PATH.'index.php';
+namespace faqMan\Processors\Mgr\Item;
+use faqMan\Model\faqManItem;
+use MODX\Revolution\Processors\Model\UpdateProcessor;
 
-$corePath = $modx->getOption('faqman.core_path',null,$modx->getOption('core_path').'components/faqman/');
-$modx->faqman = $modx->services->get('faqMan');
+/**
+ * Publish an Item
+ *
+ * @package faqman
+ * @subpackage processors
+ */
+class Publish extends UpdateProcessor {
+    public $classKey = faqManItem::class;
+    public $languageTopic = array('faqman:default');
+    public $objectType = 'faqman.faqman';
 
-$modx->lexicon->load('faqman:default');
+    public function beforeSave() {
+        $this->object->set('published', 1);
 
-/* handle request */
-$path = $modx->getOption('processorsPath',$modx->faqman->config,$corePath.'src/Processors/');
-$modx->request->handleRequest(array(
-    'processors_path' => $path,
-    'location' => '',
-));
+        return true;
+    }
+}
