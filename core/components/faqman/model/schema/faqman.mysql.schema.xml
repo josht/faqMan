@@ -7,7 +7,7 @@
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
         <field key="rank" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="published" dbtype="integer" precision="1" attributes="unsigned" phptype="integer" null="false" default="1" />
-        <composite alias="Item" class="faqManItem" local="id" foreign="set" cardinality="many" owner="local" />
+        <composite alias="Item" class="faqMan\Model\faqManItem" local="id" foreign="set" cardinality="many" owner="local" />
     </object>
 
     <object class="faqManItem" table="faqman_items" extends="xPDO\Om\xPDOSimpleObject">
@@ -19,6 +19,6 @@
         <field key="type" dbtype="integer" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="published" dbtype="integer" precision="1" attributes="unsigned" phptype="integer" null="false" default="1" />
         <field key="set" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
-        <aggregate alias="Set" class="faqManSet" local="set" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Set" class="faqMan\Model\faqManSet" local="set" foreign="id" cardinality="one" owner="foreign" />
     </object>
 </model>

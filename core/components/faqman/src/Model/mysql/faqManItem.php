@@ -98,7 +98,7 @@ class faqManItem extends \faqMan\Model\faqManItem
         array (
             'Set' => 
             array (
-                'class' => 'faqManSet',
+                'class' => 'faqMan\\Model\\faqManSet',
                 'local' => 'set',
                 'foreign' => 'id',
                 'cardinality' => 'one',

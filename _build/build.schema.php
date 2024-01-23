@@ -57,8 +57,8 @@ $manager   = $modx->getManager();
 $generator = $manager->getGenerator();
 
 
-//$generator->parseSchema($sources['core'] . '/model/schema/'.PKG_NAME_LOWER.'.mysql.schema.xml', $sources['model'], ['namespacePrefix' => 'faqMan']);
-$manager->createObjectContainer('faqMan\Model\faqManItem');
+$generator->parseSchema($sources['core'] . '/model/schema/'.PKG_NAME_LOWER.'.mysql.schema.xml', $sources['model'], ['namespacePrefix' => 'faqMan']);
+//$manager->createObjectContainer('faqMan\Model\faqManItem');
 
 
 $mtime     = microtime();

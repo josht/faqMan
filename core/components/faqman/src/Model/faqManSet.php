@@ -11,7 +11,7 @@ use xPDO\xPDO;
  * @property integer $rank
  * @property integer $published
  *
- * @property \faqManItem[] $Item
+ * @property \faqMan\Model\faqManItem[] $Item
  *
  * @package faqMan\Model
  */

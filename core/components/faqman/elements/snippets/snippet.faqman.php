@@ -4,13 +4,11 @@
  *
  * @package faqman
  */
-$faqMan = $modx->getService(
-    'faqman',
-    'faqMan',
-    $modx->getOption('faqman.core_path', null, $modx->getOption('core_path').'components/faqman/').'model/faqman/',
-    $scriptProperties
-);
-if (!($faqMan instanceof faqMan)) return '';
+use \faqMan\Model\faqManSet;
+use \faqMan\Model\faqManItem;
+
+$faqMan = $modx->services->get('faqMan');
+if (!($faqMan instanceof \faqMan\faqMan)) return '';
 
 $set                = $modx->getOption('set', $scriptProperties, null);
 $sets               = $modx->getOption('sets', $scriptProperties, null);
@@ -26,7 +24,7 @@ $outputSeparator    = $modx->getOption('outputSeparator', $scriptProperties, "\n
 $setOutputSeparator = $modx->getOption('setOutputSeparator', $scriptProperties, "\n");
 
 /* build query */
-$c = $modx->newQuery('faqManSet');
+$c = $modx->newQuery(faqManSet::class);
 
 if (!empty($set)) {
     $c->where(array(
@@ -48,7 +46,7 @@ if (!$showUnpublished) {
 if (!empty($limit)) $c->limit($limit);
 
 // Get collection of FAQ sets based on query
-$sets = $modx->getCollection('faqManSet', $c);
+$sets = $modx->getCollection(faqManSet::class, $c);
 
 // Loop through found FAQ sets and build the output
 $list = array();
@@ -58,7 +56,7 @@ foreach ($sets as $set) {
     $setArray = $set->toArray();
 
     // Loop through items and set output to array
-    $ci = $modx->newQuery('faqManItem');
+    $ci = $modx->newQuery(faqManItem::class);
 
     // Hide unpublished items
     if (!$showUnpublished) {
