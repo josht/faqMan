@@ -11,7 +11,7 @@ Faqman.grid.Items = function(config) {
         id: 'faqman-grid-items'
         ,url: Faqman.config.connectorUrl
         ,baseParams: {
-            action: 'mgr/item/getList'
+            action: 'faqMan\\Processors\\Mgr\\Item\\getList'
             ,set: config.setid
         }
         ,fields: ['id', 'question', 'answer', 'set', 'rank', 'actions']
@@ -222,7 +222,7 @@ Ext.extend(Faqman.grid.Items,MODx.grid.Grid,{
             ,text: _('faqman.item_remove_confirm')
             ,url: Faqman.config.connectorUrl
             ,params: {
-                action: 'mgr/item/remove'
+                action: 'faqMan\\Processors\\Mgr\\Item\\Remove'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -239,7 +239,7 @@ Ext.extend(Faqman.grid.Items,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: Faqman.config.connectorUrl
             ,params: {
-                action: 'mgr/item/publish'
+                action: 'faqMan\\Processors\\Mgr\\Item\\Publish'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -254,7 +254,7 @@ Ext.extend(Faqman.grid.Items,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: Faqman.config.connectorUrl
             ,params: {
-                action: 'mgr/item/unpublish'
+                action: 'faqMan\\Processors\\Mgr\\Item\\Unpublish'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -305,7 +305,7 @@ Faqman.window.CreateItem = function(config) {
         ,url: Faqman.config.connectorUrl
         ,closeAction: 'close'
         ,baseParams: {
-            action: 'mgr/item/create'
+            action: 'faqMan\\Processors\\Mgr\\Item\\Create'
             ,set: config.set
         }
         ,fields: [{
@@ -343,7 +343,7 @@ Faqman.window.UpdateItem = function(config) {
         ,width: 650
         ,modal: true
         ,url: Faqman.config.connectorUrl
-        ,action: 'mgr/item/update'
+        ,action: 'faqMan\\Processors\\Mgr\\Item\\Update'
         ,closeAction: 'close'
         ,fields: [{
             xtype: 'hidden'

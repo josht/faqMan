@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<model package="faqman" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="faqman" version="1.1">
+<model package="faqMan\Model" platform="mysql" defaultEngine="InnoDB" phpdoc-package="faqman" version="3.0">
 
     <!-- FAQ's are grouped into 'sets', when categories are implemented they will be used to group items within sets -->
-    <object class="faqManSet" table="faqman_set" extends="xPDOSimpleObject">
+    <object class="faqManSet" table="faqman_set" extends="xPDO\Om\xPDOSimpleObject">
         <field key="name" dbtype="varchar" precision="255" phptype="string" null="false" default="" />
         <field key="description" dbtype="text" phptype="string" null="false" default="" />
         <field key="rank" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="published" dbtype="integer" precision="1" attributes="unsigned" phptype="integer" null="false" default="1" />
-
-        <composite alias="Item" class="faqManItem" local="id" foreign="set" cardinality="many" owner="local" />
+        <composite alias="Item" class="faqMan\Model\faqManItem" local="id" foreign="set" cardinality="many" owner="local" />
     </object>
 
-    <object class="faqManItem" table="faqman_items" extends="xPDOSimpleObject">
+    <object class="faqManItem" table="faqman_items" extends="xPDO\Om\xPDOSimpleObject">
         <field key="question" dbtype="text" phptype="string" null="false" default="" />
         <field key="answer" dbtype="text" phptype="string" null="false" default="" />
+        <field key="author" dbtype="tinytext" phptype="string" null="true" default="" />
+        <field key="createdAt" dbtype="timestamp" phptype="string" null="false" attributes="DEFAULT CURRENT_TIMESTAMP" />
         <field key="rank" dbtype="integer" precision="5" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="type" dbtype="integer" precision="1" attributes="unsigned" phptype="integer" null="false" default="0" />
         <field key="published" dbtype="integer" precision="1" attributes="unsigned" phptype="integer" null="false" default="1" />
-
         <field key="set" dbtype="integer" precision="10" attributes="unsigned" phptype="integer" null="false" default="0" index="index" />
-
-        <aggregate alias="Set" class="faqManSet" local="set" foreign="id" cardinality="one" owner="foreign" />
+        <aggregate alias="Set" class="faqMan\Model\faqManSet" local="set" foreign="id" cardinality="one" owner="foreign" />
     </object>
 </model>

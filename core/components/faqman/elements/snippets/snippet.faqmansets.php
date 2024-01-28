@@ -6,9 +6,11 @@
  *
  * @package faqman
  */
+use faqMan\Model\faqManSet;
+use faqMan\Model\faqManItem;
 
-$faqMan = $modx->getService('faqman','faqMan',$modx->getOption('faqman.core_path',null,$modx->getOption('core_path').'components/faqman/').'model/faqman/',$scriptProperties);
-if (!($faqMan instanceof faqMan)) return '';
+$faqMan = $modx->services->get('faqMan');
+if (!($faqMan instanceof faqMan\faqMan)) return '';
 
 $set = $modx->getOption('set',$scriptProperties,null);
 $tpl = $modx->getOption('tpl',$scriptProperties,'Faqs');
@@ -22,7 +24,7 @@ $questionOutputSeparator = $modx->getOption('questionOutputSeparator',$scriptPro
 $showUnpublished = $modx->getOption('showUnpublished', $scriptProperties, false);
 
 /* build query */
-$c = $modx->newQuery('faqManSet');
+$c = $modx->newQuery(faqManSet::class);
 
 if (!empty($set)) {
     $field = (is_numeric($set)) ? 'id' : 'name';
@@ -38,7 +40,7 @@ if (!$showUnpublished) {
 
 $c->sortby($modx->quote($sortBy),$sortDir);
 if (!empty($limit)) $c->limit($limit);
-$items = $modx->getCollection('faqManSet',$c);
+$items = $modx->getCollection(faqManSet::class,$c);
 
 /* iterate through items */
 $list = array();
@@ -50,7 +52,7 @@ foreach ($items as $item) {
     $itemArray['setidx'] = $si;
 
     // get faqManItems of this set
-    $criteria = $modx->newQuery('faqManItem');
+    $criteria = $modx->newQuery(faqManItem::class);
     if (!$showUnpublished) {
         $criteria->where(array('published' => true));
     }

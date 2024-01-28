@@ -19,7 +19,7 @@ Faqman.grid.Sets = function(config) {
     Ext.applyIf(config,{
         id: 'faqman-grid-sets'
         ,url: Faqman.config.connectorUrl
-        ,baseParams: { action: 'mgr/set/getList' }
+        ,baseParams: { action: 'faqMan\\Processors\\Mgr\\Set\\getList' }
         ,fields: ['id','name','description','rank', 'published']
         ,autoHeight: true
         ,paging: true
@@ -28,7 +28,7 @@ Faqman.grid.Sets = function(config) {
         ,remoteSort: true
         ,anchor: '97%'
         ,autoExpandColumn: 'name'
-        ,save_action: 'mgr/set/updateFromGrid'
+        ,save_action: 'faqMan\\Processors\\Mgr\\Set\\UpdateFromGrid'
         ,autosave: true
         ,view: gridView
         ,columns: [
@@ -95,7 +95,7 @@ Ext.extend(Faqman.grid.Sets,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'mgr/set/sort'
+                action: 'faqMan\\Processors\\Mgr\\Set\\Sort'
                 ,source: o.source.id
                 ,target: o.target.id
             }
@@ -190,7 +190,7 @@ Ext.extend(Faqman.grid.Sets,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'mgr/set/publish'
+                action: 'faqMan\\Processors\\Mgr\\Set\\Publish'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -207,7 +207,7 @@ Ext.extend(Faqman.grid.Sets,MODx.grid.Grid,{
         MODx.Ajax.request({
             url: this.config.url
             ,params: {
-                action: 'mgr/set/unpublish'
+                action: 'faqMan\\Processors\\Mgr\\Set\\Unpublish'
                 ,id: this.menu.record.id
             }
             ,listeners: {
@@ -248,7 +248,7 @@ Faqman.window.CreateSet = function(config) {
         ,width: 475
         ,modal: true
         ,url: Faqman.config.connectorUrl
-        ,action: 'mgr/set/create'
+        ,action: 'faqMan\\Processors\\Mgr\\Set\\Create'
         ,fields: [{
             xtype: 'textfield'
             ,fieldLabel: _('name')
@@ -276,7 +276,7 @@ Faqman.window.UpdateSet = function(config) {
         ,width: 475
         ,modal: true
         ,url: Faqman.config.connectorUrl
-        ,action: 'mgr/set/update'
+        ,action: 'faqMan\\Processors\\Mgr\\Set\\Update'
         ,fields: [{
             xtype: 'hidden'
             ,name: 'id'

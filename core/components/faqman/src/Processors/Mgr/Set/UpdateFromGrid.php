@@ -16,26 +16,26 @@
  * You should have received a copy of the GNU General Public License along with
  * faqMan; if not, write to the Free Software Foundation, Inc., 59 Temple
  * Place, Suite 330, Boston, MA 02111-1307 USA
- */
-/**
- * faqMan Connector
  *
  * @package faqman
  */
-if (!@include_once dirname(__FILE__, 5).'/config.core.php') {
-    require_once dirname(__FILE__, 4).'/config.core.php';
+namespace faqMan\Processors\Mgr\Set;
+
+/**
+ * Update an Item
+ *
+ * @package faqman
+ * @subpackage processors
+ */
+
+class UpdateFromGrid extends Update {
+    public function initialize() {
+        $data = $this->getProperty('data');
+        if (empty($data)) return $this->modx->lexicon('invalid_data');
+        $data = $this->modx->fromJSON($data);
+        if (empty($data)) return $this->modx->lexicon('invalid_data');
+        $this->setProperties($data);
+        $this->unsetProperty('data');
+        return parent::initialize();
+    }
 }
-require_once MODX_CORE_PATH.'config/'.MODX_CONFIG_KEY.'.inc.php';
-require_once MODX_CONNECTORS_PATH.'index.php';
-
-$corePath = $modx->getOption('faqman.core_path',null,$modx->getOption('core_path').'components/faqman/');
-$modx->faqman = $modx->services->get('faqMan');
-
-$modx->lexicon->load('faqman:default');
-
-/* handle request */
-$path = $modx->getOption('processorsPath',$modx->faqman->config,$corePath.'src/Processors/');
-$modx->request->handleRequest(array(
-    'processors_path' => $path,
-    'location' => '',
-));
